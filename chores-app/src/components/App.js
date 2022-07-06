@@ -1,6 +1,7 @@
 import '../styles/App.css';
 import './server.js';
 import { BrowserRouter as Router, Routes ,Route } from 'react-router-dom';
+import Nav from './Nav';
 import HomePage from './HomePage';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -8,17 +9,20 @@ import SignUp from './SignUp';
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
+      <Nav />
+      <div id='app-container'>
+        <Router>
+          <Routes>
 
-          <Route path="/" element={<HomePage />} />
+            <Route exact path="/" element={<HomePage />} />
 
-          <Route path="/login" element={<Login />} />
+            <Route exact path="/login" element={<Login />} />
 
-          <Route path="signup" element={<SignUp />} />
+            <Route exact path="signup" element={<SignUp />} />
 
-        </Routes>
-      </Router>
+          </Routes>
+        </Router>
+      </div>
     </div>
   );
 }
