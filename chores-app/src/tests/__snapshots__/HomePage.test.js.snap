@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the homepage matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <h1>
+      Home Page
+    </h1>
+    <div
+      class="container"
+    >
+      <h1>
+        Login
+      </h1>
+      <form
+        id="login"
+      >
+        <label>
+          Name:
+          <input
+            name="name"
+            type="text"
+          />
+        </label>
+        <label>
+          Password:
+          <input
+            password="password"
+            type="text"
+          />
+        </label>
+        <input
+          type="submit"
+          value="Log in"
+        />
+      </form>
+    </div>
+    <p>
+      Not yet a member?
+    </p>
+    <button
+      type="button"
+    >
+      Sign Up!
+    </button>
+  </div>
+</DocumentFragment>
+`;
