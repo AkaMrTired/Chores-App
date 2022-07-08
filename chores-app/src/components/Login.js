@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const Login = () => {
   const initialState = {
     fields: {
-      name: "",
+      email: "",
       password: "",
     },
   };
@@ -23,13 +23,13 @@ const Login = () => {
     <div className="container">
       <h1>Login</h1>
       <form onSubmit={logIn}>
-        <label htmlFor="name">Full Name </label>
+        <label htmlFor="yourEmail">Your Email</label>
         <input
-          name="name"
+          type="email"
+          name="yourEmail"
           required
-          type="text"
-          placeholder="e.g. Joan Smith"
-          value={fields.name}
+          placeholder="e.g example@example.com"
+          value={fields.email}
           onChange={handleFieldChange}
         />
         <label htmlFor="password">Password</label>
