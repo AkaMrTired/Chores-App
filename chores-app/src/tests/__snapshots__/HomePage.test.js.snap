@@ -43,7 +43,11 @@ exports[`the homepage matches the snapshot 1`] = `
     <button
       type="button"
     >
-      Sign Up!
+      <a
+        href="/signup"
+      >
+        Sign Up!
+      </a>
     </button>
   </div>
 </DocumentFragment>

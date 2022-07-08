@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Login from "./Login";
 
 const HomePage = () => {
@@ -9,7 +8,7 @@ const HomePage = () => {
       <Login />
       <p>Not yet a member?</p>
       <button type="button">
-        <Link to="/signup">Sign Up!</Link>
+        <a href="/signup">Sign Up!</a>
       </button>
     </div>
   );
