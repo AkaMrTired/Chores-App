@@ -14,27 +14,36 @@ exports[`the homepage matches the snapshot 1`] = `
       <h1>
         Login
       </h1>
-      <form
-        id="login"
-      >
-        <label>
-          Name:
-          <input
-            name="name"
-            type="text"
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            password="password"
-            type="text"
-          />
+      <form>
+        <label
+          for="name"
+        >
+          Full Name 
         </label>
         <input
-          type="submit"
-          value="Log in"
+          name="name"
+          placeholder="e.g. Joan Smith"
+          required=""
+          type="text"
+          value=""
         />
+        <label
+          for="password"
+        >
+          Password
+        </label>
+        <input
+          name="password"
+          placeholder="*******"
+          required=""
+          type="password"
+          value=""
+        />
+        <button
+          type="submit"
+        >
+          Log in
+        </button>
       </form>
     </div>
     <p>
