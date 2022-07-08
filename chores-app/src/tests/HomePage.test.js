@@ -11,8 +11,7 @@ describe("the homepage", () => {
   it("should render basic fields", () => {
     render(<HomePage />);
     expect(screen.getByText(/home page/i)).toBeInTheDocument();
-    expect(screen.getByText(/login/i)).toBeInTheDocument();
-    expect(screen.getByText(/name/i)).toBeInTheDocument();
+    expect(screen.getByText(/email/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Log In/i })).toBeInTheDocument();
     expect(screen.getByText(/password/i)).toBeInTheDocument();
     expect(screen.getByText(/not yet a member/i)).toBeInTheDocument();

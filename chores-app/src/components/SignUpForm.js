@@ -12,11 +12,17 @@ const SignUpForm = () => {
     },
   };
   const [fields, setFields] = useState(initialState.fields);
+  const [passwordError, setPasswordError] = useState();
 
-  const createAccount = () => {
-    // some axios code to go here to send the field data to the database
-    // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
-    setFields(initialState.fields);
+  const createAccount = (event) => {
+    if (fields.password === fields.confirmPassword) {
+      // some axios code to go here to send the field data to the database
+      // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
+      setFields(initialState.fields);
+    } else {
+      event.preventDefault();
+      setPasswordError("Those passwords did not match, please try again");
+    }
   };
   const handleFieldChange = (event) => {
     event.preventDefault();
@@ -78,6 +84,7 @@ const SignUpForm = () => {
             value={fields.confirmPassword}
             onChange={handleFieldChange}
           />
+          {!!passwordError && <p>{passwordError}</p>}
 
           <button type="submit">Create Account</button>
         </form>

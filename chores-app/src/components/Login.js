@@ -20,30 +20,27 @@ const Login = () => {
     setFields({ ...fields, [event.target.name]: event.target.value });
   };
   return (
-    <div className="container">
-      <h1>Login</h1>
-      <form onSubmit={logIn}>
-        <label htmlFor="yourEmail">Your Email</label>
-        <input
-          type="email"
-          name="yourEmail"
-          required
-          placeholder="e.g example@example.com"
-          value={fields.email}
-          onChange={handleFieldChange}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          required
-          placeholder="*******"
-          value={fields.password}
-          onChange={handleFieldChange}
-        />
-        <button type="submit">Log in</button>
-      </form>
-    </div>
+    <form onSubmit={logIn}>
+      <label htmlFor="yourEmail">Your Email</label>
+      <input
+        type="email"
+        name="yourEmail"
+        required
+        placeholder="e.g example@example.com"
+        value={fields.email}
+        onChange={handleFieldChange}
+      />
+      <label htmlFor="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        required
+        placeholder="*******"
+        value={fields.password}
+        onChange={handleFieldChange}
+      />
+      <button type="submit">Log in</button>
+    </form>
   );
 };
 

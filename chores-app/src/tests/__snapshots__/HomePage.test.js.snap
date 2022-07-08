@@ -8,44 +8,40 @@ exports[`the homepage matches the snapshot 1`] = `
     <h1>
       Home Page
     </h1>
-    <div
-      class="container"
-    >
-      <h1>
-        Login
-      </h1>
-      <form>
-        <label
-          for="name"
-        >
-          Full Name 
-        </label>
-        <input
-          name="name"
-          placeholder="e.g. Joan Smith"
-          required=""
-          type="text"
-          value=""
-        />
-        <label
-          for="password"
-        >
-          Password
-        </label>
-        <input
-          name="password"
-          placeholder="*******"
-          required=""
-          type="password"
-          value=""
-        />
-        <button
-          type="submit"
-        >
-          Log in
-        </button>
-      </form>
-    </div>
+    <h3>
+      Hi, welcome to Bish Bash Dosh, please log in or sign up below!
+    </h3>
+    <form>
+      <label
+        for="yourEmail"
+      >
+        Your Email
+      </label>
+      <input
+        name="yourEmail"
+        placeholder="e.g example@example.com"
+        required=""
+        type="email"
+        value=""
+      />
+      <label
+        for="password"
+      >
+        Password
+      </label>
+      <input
+        name="password"
+        placeholder="*******"
+        required=""
+        type="password"
+        value=""
+      />
+      <button
+        type="submit"
+      >
+        Log in
+      </button>
+    </form>
     <p>
       Not yet a member?
     </p>
