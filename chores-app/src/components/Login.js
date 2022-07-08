@@ -10,9 +10,10 @@ const Login = () => {
   };
   const [fields, setFields] = useState(initialState.fields);
 
-  const logIn = () => {
+  const logIn = (event) => {
     // some axios code to go here to send the field data to the database & verify it!
     // currently the fields will reset but we can change this so we change the page to be the parent's home page once verification completes
+    event.preventDefault();
     setFields(initialState.fields);
   };
   const handleFieldChange = (event) => {
@@ -21,10 +22,10 @@ const Login = () => {
   };
   return (
     <form onSubmit={logIn}>
-      <label htmlFor="yourEmail">Your Email</label>
+      <label htmlFor="email">Your Email</label>
       <input
         type="email"
-        name="yourEmail"
+        name="email"
         required
         placeholder="e.g example@example.com"
         value={fields.email}
