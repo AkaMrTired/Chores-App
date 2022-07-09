@@ -8,6 +8,7 @@ import React from "react";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
 import SignUpForm from "./SignUpForm";
+import NewMemberForm from "./NewMemberForm";
 
 const App = () => {
   return (
@@ -19,6 +20,8 @@ const App = () => {
             <Route exact path="/" element={<HomePage />} />
 
             <Route exact path="/signup" element={<SignUpForm />} />
+
+            <Route exact path="/newmember" element={<NewMemberForm />} />
           </Switch>
         </Router>
       </div>

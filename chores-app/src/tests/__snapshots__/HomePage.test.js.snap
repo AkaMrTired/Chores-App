@@ -13,12 +13,12 @@ exports[`the homepage matches the snapshot 1`] = `
     </h3>
     <form>
       <label
-        for="yourEmail"
+        for="email"
       >
         Your Email
       </label>
       <input
-        name="yourEmail"
+        name="email"
         placeholder="e.g example@example.com"
         required=""
         type="email"
