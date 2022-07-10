@@ -17,6 +17,7 @@ exports[`the homepage matches the snapshot 1`] = `
         Add new chore +
       </a>
     </button>
+    <p />
   </div>
 </DocumentFragment>
 `;

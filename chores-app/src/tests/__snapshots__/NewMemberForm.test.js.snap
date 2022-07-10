@@ -59,7 +59,7 @@ exports[`the new member form matches the snapshot 1`] = `
         type="button"
       >
         <a
-          href="/dashboard"
+          href="/parentdashboard"
         >
           Back To Dashboard
         </a>

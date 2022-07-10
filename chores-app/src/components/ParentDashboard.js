@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ChoresList from "./ChoresList";
 
 const ParentDashboard = ({ availableChores }) => {
@@ -11,5 +12,11 @@ const ParentDashboard = ({ availableChores }) => {
       <ChoresList availableChores={availableChores} />
     </div>
   );
+};
+
+// we will need to edit the prop validation when we know what the data looks like.
+
+ParentDashboard.propTypes = {
+  availableChores: PropTypes.arrayOf(PropTypes.text).isRequired,
 };
 export default ParentDashboard;
