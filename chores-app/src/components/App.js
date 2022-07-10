@@ -1,10 +1,14 @@
 import "../styles/App.css";
-import "./server.js";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes as Switch,
+  Route,
+} from "react-router-dom";
+import React from "react";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
-import Login from "./Login";
 import SignUpForm from "./SignUpForm";
+import NewMemberForm from "./NewMemberForm";
 
 const App = () => {
   return (
@@ -12,13 +16,13 @@ const App = () => {
       <Nav />
       <div id="app-container">
         <Router>
-          <Routes>
+          <Switch>
             <Route exact path="/" element={<HomePage />} />
 
-            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<SignUpForm />} />
 
-            <Route exact path="signup" element={<SignUpForm />} />
-          </Routes>
+            <Route exact path="/newmember" element={<NewMemberForm />} />
+          </Switch>
         </Router>
       </div>
     </div>

@@ -1,4 +1,5 @@
-import { Link, BrowserRouter as Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Routes } from "react-router-dom";
 
 const Nav = () => {
   return (

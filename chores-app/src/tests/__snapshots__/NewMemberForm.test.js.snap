@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the new member form matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sign-up-container"
+  >
+    <h1>
+      Invite New Member
+    </h1>
+    <div>
+      <form>
+        <label
+          for="role"
+        >
+          Role
+        </label>
+        <select
+          name="role"
+        >
+          <option
+            value="parent"
+          >
+            Parent
+          </option>
+          <option
+            value="child"
+          >
+            Child
+          </option>
+        </select>
+        <label
+          for="email"
+        >
+          Email
+        </label>
+        <input
+          name="email"
+          placeholder="e.g example@example.com"
+          required=""
+          type="email"
+          value=""
+        />
+        <button
+          type="submit"
+        >
+          Send Invite!
+        </button>
+      </form>
+      <button
+        type="button"
+      >
+        <a
+          href="/dashboard"
+        >
+          Back To Dashboard
+        </a>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

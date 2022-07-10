@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the sign up form matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sign-up-container"
+  >
+    <h1>
+      Sign Up
+    </h1>
+    <div>
+      <form>
+        <label
+          for="familyName"
+        >
+          Family Name 
+        </label>
+        <input
+          name="familyName"
+          placeholder="e.g. The Cool Gang"
+          required=""
+          type="text"
+          value=""
+        />
+        <label
+          for="yourName"
+        >
+          Your Name 
+        </label>
+        <input
+          name="yourName"
+          placeholder="e.g Mommy"
+          required=""
+          type="text"
+          value=""
+        />
+        <label
+          for="yourEmail"
+        >
+          Your Email
+        </label>
+        <input
+          name="yourEmail"
+          placeholder="e.g example@example.com"
+          required=""
+          type="email"
+          value=""
+        />
+        <label
+          for="password"
+        >
+          Password
+        </label>
+        <input
+          data-testid="password"
+          name="password"
+          placeholder="*******"
+          required=""
+          type="password"
+          value=""
+        />
+        <label
+          for="confirmPassword"
+        >
+          Confirm Password 
+        </label>
+        <input
+          name="confirmPassword"
+          placeholder="*******"
+          required=""
+          type="password"
+          value=""
+        />
+        <button
+          type="submit"
+        >
+          Create Account
+        </button>
+      </form>
+    </div>
+    <p>
+      You will be able to invite more family members once you make your account.
+    </p>
+  </div>
+</DocumentFragment>
+`;
