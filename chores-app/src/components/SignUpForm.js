@@ -64,13 +64,17 @@ const SignUpForm = () => {
             onChange={handleFieldChange}
           />
 
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">
+            Password (minimum 5 characters, must contain a letter and a number)
+          </label>
           <input
             type="password"
             name="password"
             data-testid="password"
             required
             placeholder="*******"
+            minLength="5"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
             value={fields.password}
             onChange={handleFieldChange}
           />

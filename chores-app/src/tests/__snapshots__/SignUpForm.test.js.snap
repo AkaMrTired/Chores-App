@@ -49,11 +49,13 @@ exports[`the sign up form matches the snapshot 1`] = `
         <label
           for="password"
         >
-          Password
+          Password (minimum 5 characters, must contain a letter and a number)
         </label>
         <input
           data-testid="password"
+          minlength="5"
           name="password"
+          pattern="^(?=.*[A-Za-z])(?=.*\\\\d)[A-Za-z\\\\d]{5,}$"
           placeholder="*******"
           required=""
           type="password"

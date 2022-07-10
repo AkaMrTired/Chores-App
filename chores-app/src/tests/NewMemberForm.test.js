@@ -14,7 +14,7 @@ describe("the new member form", () => {
     expect(
       screen.getByRole("button", { name: /send invite/i })
     ).toBeInTheDocument();
-    expect(screen.getByText(/role/i)).toBeInTheDocument();
+    expect(screen.getByText(/choose a role/i)).toBeInTheDocument();
     expect(screen.getByText(/email/i)).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /back to dashboard/i })
