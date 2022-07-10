@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
-// import emailjs from "@emailjs/browser";
+import emailjs from "@emailjs/browser";
 
 const NewMemberForm = () => {
   const initialState = {
@@ -11,38 +11,32 @@ const NewMemberForm = () => {
   };
   const [fields, setFields] = useState(initialState.fields);
   const [roleError, setRoleError] = useState();
-  const [emailParams, setEmailParams] = useState({
-    link: "",
-    email: "lydia.wallace@outlook.com",
-  });
-  const [successMessage, setSuccessMessage] = useState();
+  const [message, setMessage] = useState();
+  const sendEmail = async () => {
+    try {
+      const emailParams = {
+        // TO DO: add logic to create the correct link
+        link: "placeholder.com",
+        email: fields.email,
+      };
+      // TO DO: add some axios code to go here to send the field data to the database
+      await emailjs.send(
+        process.env.REACT_APP_EMAIL_SERVICE_ID,
+        process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+        emailParams,
+        process.env.REACT_APP_EMAIL_PUBLIC_KEY
+      );
+      setMessage("Invite sent, add another or return to dashboard");
+      setFields(initialState.fields);
+    } catch (error) {
+      setMessage(`uh oh, it looks like there was an error: ${error}`);
+    }
+  };
 
-  const handleSubmit = async (event) => {
-    // TO DO: some logic here to insert the correct URL as the link here
-    await setEmailParams({
-      link: "placeholder.com",
-      email: fields.email,
-    });
-
+  const handleSubmit = (event) => {
     if (fields.role !== "Choose a role") {
       event.preventDefault();
-      console.log(`on submit==> ${emailParams.email}`);
-      setSuccessMessage("Invite sent, add another or return to dashboard");
-      // TO DO: add some axios code to go here to send the field data to the database
-      // emailjs
-      //   .send(
-      //     process.env.REACT_APP_EMAIL_SERVICE_ID,
-      //     process.env.REACT_APP_EMAIL_TEMPLATE_ID,
-      //     emailParams,
-      //     process.env.REACT_APP_EMAIL_PUBLIC_KEY
-      //   )
-      //   .then(
-      //     setSuccessMessage("Invite sent, add another or return to dashboard")
-      //   )
-      //   .then(setFields(initialState.fields))
-      //   .catch((error) => {
-      //     setSuccessMessage(error);
-      //   });
+      sendEmail();
     } else {
       event.preventDefault();
       setRoleError("Please select a role for the person you are inviting");
@@ -51,7 +45,6 @@ const NewMemberForm = () => {
 
   const handleFieldChange = (event) => {
     event.preventDefault();
-    console.log(`on field change ==> ${emailParams.email}`);
     setFields({ ...fields, [event.target.name]: event.target.value });
     setRoleError();
   };
@@ -62,7 +55,12 @@ const NewMemberForm = () => {
       <div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="role">Role</label>
-          <select name="role" value={fields.role} onChange={handleFieldChange}>
+          <select
+            required
+            name="role"
+            value={fields.role}
+            onChange={handleFieldChange}
+          >
             <option value="Choose a role">Choose a Role</option>
 
             <option value="parent">Parent</option>
@@ -80,7 +78,7 @@ const NewMemberForm = () => {
           />
 
           <button type="submit">Send Invite!</button>
-          {!!successMessage && <p>{successMessage}</p>}
+          {!!message && <p>{message}</p>}
         </form>
       </div>
       <div>
