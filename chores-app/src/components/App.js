@@ -9,6 +9,7 @@ import Nav from "./Nav";
 import HomePage from "./HomePage";
 import SignUpForm from "./SignUpForm";
 import NewMemberForm from "./NewMemberForm";
+import NewMemberSignUp from "./NewMemberSignUp";
 
 const App = () => {
   return (
@@ -22,6 +23,12 @@ const App = () => {
             <Route exact path="/signup" element={<SignUpForm />} />
 
             <Route exact path="/newmember" element={<NewMemberForm />} />
+
+            <Route
+              exact
+              path="/newmembersignup"
+              element={<NewMemberSignUp />}
+            />
           </Switch>
         </Router>
       </div>
