@@ -83,7 +83,7 @@ const NewMemberForm = () => {
       </div>
       <div>
         <button type="button">
-          <a href="/dashboard">Back To Dashboard</a>
+          <a href="/parentdashboard">Back To Dashboard</a>
         </button>
       </div>
     </div>
