@@ -8,13 +8,15 @@ import {
 import Nav from "./Nav";
 import HomePage from "./HomePage";
 import SignUpForm from "./SignUpForm";
-import NewMemberForm from "./NewMemberForm";
+import AddNewMemberForm from "./AddNewMemberForm";
 import NewMemberSignUp from "./NewMemberSignUp";
 import ParentDashboard from "./ParentDashboard";
 import AddChoreForm from "./AddChoreForm";
 
 const App = () => {
-  const [availableChores, setAvailableChores] = useState([]);
+  const [chores, setChores] = useState([
+    { _id: 123, name: "test", price: "1", status: "T" },
+  ]);
   return (
     <div className="App">
       <Nav />
@@ -25,17 +27,17 @@ const App = () => {
 
             <Route exact path="/signup" element={<SignUpForm />} />
 
-            <Route exact path="/newmember" element={<NewMemberForm />} />
+            <Route exact path="/newmember" element={<AddNewMemberForm />} />
             <Route
               exact
               path="/parentdashboard"
-              element={<ParentDashboard availableChores={availableChores} />}
+              element={<ParentDashboard chores={chores} />}
             />
 
             <Route
               exact
               path="/addchore"
-              element={<AddChoreForm setAvailableChores={setAvailableChores} />}
+              element={<AddChoreForm setChores={setChores} />}
             />
 
             <Route
