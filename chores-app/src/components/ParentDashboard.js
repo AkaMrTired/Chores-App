@@ -36,6 +36,13 @@ const ParentDashboard = ({ chores }) => {
 // we will need to edit the prop validation when we know what the data looks like.
 
 ParentDashboard.propTypes = {
-  chores: PropTypes.arrayOf(PropTypes.text).isRequired,
+  chores: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.number,
+      name: PropTypes.string,
+      price: PropTypes.string,
+      status: PropTypes.string,
+    })
+  ).isRequired,
 };
 export default ParentDashboard;

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the parents dashboard matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <h1>
+      Dashboard
+    </h1>
+    <button
+      type="button"
+    >
+      <a
+        href="/newmember"
+      >
+        + Invite new member
+      </a>
+    </button>
+    <div
+      class="container"
+    >
+      <h1>
+        Chores
+      </h1>
+      <button
+        type="button"
+      >
+        <a
+          href="/addchore"
+        >
+          Add new chore +
+        </a>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

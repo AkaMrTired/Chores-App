@@ -16,9 +16,9 @@ const ChoreCard = ({
 }) => {
   return (
     <div>
-      <p>{name}</p>
-      <p>£{price}</p>
-      {!!status && <p>{status}</p>}
+      <div>{name}</div>
+      <div>£{price}</div>
+      {!!status && <div>{status}</div>}
       {!!editButton && (
         <button type="button" onClick={editButton}>
           edit
