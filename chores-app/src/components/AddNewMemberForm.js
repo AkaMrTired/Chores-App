@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 
-const NewMemberForm = () => {
+const AddNewMemberForm = () => {
   const initialState = {
     fields: {
       role: "Choose a role",
@@ -83,11 +83,11 @@ const NewMemberForm = () => {
       </div>
       <div>
         <button type="button">
-          <a href="/dashboard">Back To Dashboard</a>
+          <a href="/parentdashboard">Back To Dashboard</a>
         </button>
       </div>
     </div>
   );
 };
 
-export default NewMemberForm;
+export default AddNewMemberForm;

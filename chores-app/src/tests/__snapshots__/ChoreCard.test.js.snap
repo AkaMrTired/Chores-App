@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the chore card component matches the screenshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div>
+      test
+    </div>
+    <div>
+      £1
+    </div>
+    <div>
+      T
+    </div>
+    <button
+      type="button"
+    >
+      edit
+    </button>
+    <button
+      type="button"
+    >
+      delete
+    </button>
+    <button
+      type="button"
+    >
+      accept
+    </button>
+    <button
+      type="button"
+    >
+      reject
+    </button>
+    <button
+      type="button"
+    >
+      done
+    </button>
+    <button
+      type="button"
+    >
+      take
+    </button>
+  </div>
+</DocumentFragment>
+`;

@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 
-const SignUpForm = () => {
+const NewMemberSignUp = () => {
   const initialState = {
     fields: {
-      familyName: "",
       yourName: "",
-      yourEmail: "",
       password: "",
       confirmPassword: "",
     },
@@ -14,7 +12,7 @@ const SignUpForm = () => {
   const [fields, setFields] = useState(initialState.fields);
   const [passwordError, setPasswordError] = useState();
 
-  const createAccount = (event) => {
+  const completeAccount = (event) => {
     if (fields.password === fields.confirmPassword) {
       // some axios code to go here to send the field data to the database
       // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
@@ -32,18 +30,12 @@ const SignUpForm = () => {
   return (
     <div className="sign-up-container">
       <h1>Sign Up</h1>
+      <p>
+        Please finish creating your account by setting your preferred name and
+        password
+      </p>
       <div>
-        <form onSubmit={createAccount}>
-          <label htmlFor="familyName">Family Name </label>
-          <input
-            name="familyName"
-            required
-            type="text"
-            placeholder="e.g. The Cool Gang"
-            value={fields.familyName}
-            onChange={handleFieldChange}
-          />
-
+        <form onSubmit={completeAccount}>
           <label htmlFor="yourName">Your Name </label>
           <input
             name="yourName"
@@ -51,16 +43,6 @@ const SignUpForm = () => {
             type="text"
             placeholder="e.g Mommy"
             value={fields.yourName}
-            onChange={handleFieldChange}
-          />
-
-          <label htmlFor="yourEmail">Your Email</label>
-          <input
-            type="email"
-            name="yourEmail"
-            required
-            placeholder="e.g example@example.com"
-            value={fields.email}
             onChange={handleFieldChange}
           />
 
@@ -89,16 +71,11 @@ const SignUpForm = () => {
             onChange={handleFieldChange}
           />
           {!!passwordError && <p>{passwordError}</p>}
-
-          <button type="submit">Create Account</button>
+          <button type="submit">Complete Account</button>
         </form>
       </div>
-      <p>
-        You will be able to invite more family members once you make your
-        account.
-      </p>
     </div>
   );
 };
 
-export default SignUpForm;
+export default NewMemberSignUp;

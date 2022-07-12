@@ -9,7 +9,7 @@ exports[`the homepage matches the snapshot 1`] = `
       Home Page
     </h1>
     <h3>
-      Hi, welcome to Bish Bash Dosh, please log in or sign up below!
+      Welcome to Bish Bash Dosh, please log in or sign up below!
     </h3>
     <form>
       <label

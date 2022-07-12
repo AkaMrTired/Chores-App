@@ -17,7 +17,13 @@ exports[`the new member form matches the snapshot 1`] = `
         </label>
         <select
           name="role"
+          required=""
         >
+          <option
+            value="Choose a role"
+          >
+            Choose a Role
+          </option>
           <option
             value="parent"
           >
@@ -47,11 +53,13 @@ exports[`the new member form matches the snapshot 1`] = `
           Send Invite!
         </button>
       </form>
+    </div>
+    <div>
       <button
         type="button"
       >
         <a
-          href="/dashboard"
+          href="/parentdashboard"
         >
           Back To Dashboard
         </a>

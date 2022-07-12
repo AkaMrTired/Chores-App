@@ -8,20 +8,11 @@ exports[`the sign up form matches the snapshot 1`] = `
     <h1>
       Sign Up
     </h1>
+    <p>
+      Please finish creating your account by setting your preferred name and password
+    </p>
     <div>
       <form>
-        <label
-          for="familyName"
-        >
-          Family Name 
-        </label>
-        <input
-          name="familyName"
-          placeholder="e.g. The Cool Gang"
-          required=""
-          type="text"
-          value=""
-        />
         <label
           for="yourName"
         >
@@ -32,18 +23,6 @@ exports[`the sign up form matches the snapshot 1`] = `
           placeholder="e.g Mommy"
           required=""
           type="text"
-          value=""
-        />
-        <label
-          for="yourEmail"
-        >
-          Your Email
-        </label>
-        <input
-          name="yourEmail"
-          placeholder="e.g example@example.com"
-          required=""
-          type="email"
           value=""
         />
         <label
@@ -76,13 +55,10 @@ exports[`the sign up form matches the snapshot 1`] = `
         <button
           type="submit"
         >
-          Create Account
+          Complete Account
         </button>
       </form>
     </div>
-    <p>
-      You will be able to invite more family members once you make your account.
-    </p>
   </div>
 </DocumentFragment>
 `;
