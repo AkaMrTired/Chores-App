@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-// not all props required
+// not all props required all the time
 import React from "react";
 import PropTypes from "prop-types";
 
