@@ -12,14 +12,17 @@ import AddNewMemberForm from "./AddNewMemberForm";
 import NewMemberSignUp from "./NewMemberSignUp";
 import ParentDashboard from "./ParentDashboard";
 import AddChoreForm from "./AddChoreForm";
+import ChildDashboard from "./ChildDashboard";
 
 const App = () => {
   const [chores, setChores] = useState([
-    { _id: 123, name: "test", price: "1", status: "T" },
+    { _id: 123, name: "test", price: "1", status: "T", owner: 1234 },
   ]);
+
   return (
     <div className="App">
       <Nav />
+
       <div id="app-container">
         <Router>
           <Switch>
@@ -44,6 +47,12 @@ const App = () => {
               exact
               path="/newmembersignup"
               element={<NewMemberSignUp />}
+            />
+
+            <Route
+              exact
+              path="/childdashboard"
+              element={<ChildDashboard chores={chores} />}
             />
           </Switch>
         </Router>
