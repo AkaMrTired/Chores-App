@@ -14,9 +14,6 @@ const ChildDashboard = ({ chores }) => {
     console.log(requestedAmount);
   };
 
-  const doneButton = () => {
-    // done button should change the status and owner of the chore in the DB
-  };
   return (
     <div className="container">
       <h1>Dashboard</h1>
@@ -48,7 +45,7 @@ const ChildDashboard = ({ chores }) => {
             key={chore._id}
             name={chore.name}
             price={chore.price}
-            doneButton={doneButton}
+            component="ChildDashboard"
           />
         ))}
       </div>

@@ -3,10 +3,6 @@ import PropTypes from "prop-types";
 import ChoreCard from "./ChoreCard";
 
 const FindAvailableChores = ({ chores }) => {
-  const takeButton = () => {
-    // this will assign the user ID to the chore.userId & update the chore.status to T
-  };
-
   return (
     <div className="container">
       <h3>These chores are available!</h3>
@@ -18,7 +14,7 @@ const FindAvailableChores = ({ chores }) => {
             key={chore._id}
             name={chore.name}
             price={chore.price}
-            takeButton={takeButton}
+            component="FindAvailableChores"
           />
         ))}
       <div>

@@ -3,17 +3,6 @@ import PropTypes from "prop-types";
 import ChoreCard from "./ChoreCard";
 
 const ChoresToApprove = ({ chores }) => {
-  const acceptButton = () => {
-    // Accept:
-    // -> chore status goes to Unavailable
-    // -> money goes into child's balance
-  };
-  const rejectButton = () => {
-    // Reject:
-    // -> chore status goes to Taken
-    // -> chore removed from current list
-  };
-
   return (
     <div className="container">
       <h2>These are the completed chores for you to approve</h2>
@@ -31,8 +20,7 @@ const ChoresToApprove = ({ chores }) => {
             key={chore._id}
             name={chore.name}
             price={chore.price}
-            acceptButton={acceptButton}
-            rejectButton={rejectButton}
+            component="ChoresToApprove"
           />
         ))}
       <div>

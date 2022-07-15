@@ -5,10 +5,10 @@ import { useSearchParams } from "react-router-dom";
 const NewMemberSignUp = () => {
   const [searchParams] = useSearchParams();
   const userEmail = searchParams.get("email");
-  console.log(userEmail);
 
   const initialState = {
     fields: {
+      email: userEmail,
       yourName: "",
       password: "",
       confirmPassword: "",
@@ -21,8 +21,15 @@ const NewMemberSignUp = () => {
   const completeAccount = (event) => {
     if (fields.password === fields.confirmPassword) {
       // some axios code to go here to send the field data to the database
-      // currently the fields will reset but we can change this so we  change the page to be the home page once this is complete so they sign in?
-      setFields(initialState.fields);
+      // axios;
+      // .put/patch("http://localhost:3300/user", fields)
+      // .then((response) => {
+      //   console.log(response.status);
+      // })
+      // .catch(() => {
+      //   console.log(404);
+      // });
+      // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
       setSuccess(true);
     } else {
       event.preventDefault();

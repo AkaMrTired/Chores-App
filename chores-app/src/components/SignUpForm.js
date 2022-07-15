@@ -19,7 +19,7 @@ const SignUpForm = () => {
     if (fields.password === fields.confirmPassword) {
       // some axios code to go here to send the field data to the database
       // axios;
-      // .post("localhost:3300/chores", fields)
+      // .post("http://localhost:3300/user", fields)
       // .then((response) => {
       //   console.log(response.status);
       // })

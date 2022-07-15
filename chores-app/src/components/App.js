@@ -23,17 +23,23 @@ const App = () => {
     familyID: 1234,
     // this will be in context!!
   };
-  const [chores, setChores] = useState([]);
+  const [chores, setChores] = useState([
+    { _id: 123, name: "test", price: 1, status: "T", choreID: 1 },
+    { _id: 1234, name: "test", price: 1, status: "P", choreID: 2 },
+    { _id: 12345, name: "test", price: 1, status: "U", choreID: 3 },
+    { _id: 123456, name: "test", price: 1, status: "A", choreID: 4 },
+  ]);
   useEffect(() => {
     axios
-      .get(`localhost:3300/family/${user.familyID}/chores`)
+      .get(`http://localhost:3300/family/${user.familyID}/chores`)
       .then((response) => {
         setChores(response.data);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, [chores]);
+  }, [user.familyID]);
+  // need to watch incase this doesn't call the updated chores from the DB when the parent edits.
 
   return (
     <div className="App">
