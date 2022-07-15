@@ -21,32 +21,32 @@ const ChoreCard = ({
       {!!status && <div>{status}</div>}
       {!!editButton && (
         <button type="button" onClick={editButton}>
-          edit
+          Edit
         </button>
       )}
       {!!deleteButton && (
         <button type="button" onClick={deleteButton}>
-          delete
+          Delete
         </button>
       )}
       {!!acceptButton && (
         <button type="button" onClick={acceptButton}>
-          accept
+          Accept
         </button>
       )}
       {!!rejectButton && (
         <button type="button" onClick={rejectButton}>
-          reject
+          Reject
         </button>
       )}
       {!!doneButton && (
         <button type="button" onClick={doneButton}>
-          done
+          Done
         </button>
       )}
       {!!takeButton && (
         <button type="button" onClick={takeButton}>
-          take
+          Take
         </button>
       )}
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/App.css";
 import {
   BrowserRouter as Router,
@@ -13,11 +13,15 @@ import NewMemberSignUp from "./NewMemberSignUp";
 import ParentDashboard from "./ParentDashboard";
 import AddChoreForm from "./AddChoreForm";
 import ChildDashboard from "./ChildDashboard";
+import FindAvailableChores from "./FindAvailableChores";
 
 const App = () => {
-  const [chores, setChores] = useState([
-    { _id: 123, name: "test", price: "1", status: "T", owner: 1234 },
-  ]);
+  const chores = [
+    // obviously this will need to change to be info from the DB
+    { _id: 123, name: "taken", price: "1", status: "T" },
+    { _id: 1234, name: "available", price: "1", status: "A" },
+    { _id: 12345, name: "test", price: "1", status: "T" },
+  ];
 
   return (
     <div className="App">
@@ -37,11 +41,7 @@ const App = () => {
               element={<ParentDashboard chores={chores} />}
             />
 
-            <Route
-              exact
-              path="/addchore"
-              element={<AddChoreForm setChores={setChores} />}
-            />
+            <Route exact path="/addchore" element={<AddChoreForm />} />
 
             <Route
               exact
@@ -53,6 +53,12 @@ const App = () => {
               exact
               path="/childdashboard"
               element={<ChildDashboard chores={chores} />}
+            />
+
+            <Route
+              exact
+              path="/findchore"
+              element={<FindAvailableChores chores={chores} />}
             />
           </Switch>
         </Router>
