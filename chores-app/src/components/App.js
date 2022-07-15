@@ -14,13 +14,15 @@ import ParentDashboard from "./ParentDashboard";
 import AddChoreForm from "./AddChoreForm";
 import ChildDashboard from "./ChildDashboard";
 import FindAvailableChores from "./FindAvailableChores";
+import ChoresToApprove from "./ChoresToApprove";
 
 const App = () => {
   const chores = [
     // obviously this will need to change to be info from the DB
-    { _id: 123, name: "taken", price: "1", status: "T" },
-    { _id: 1234, name: "available", price: "1", status: "A" },
-    { _id: 12345, name: "test", price: "1", status: "T" },
+    { _id: 123, name: "takenChore", price: "1", status: "T" },
+    { _id: 1234, name: "availableChore", price: "1", status: "A" },
+    { _id: 12345, name: "unavailableChore", price: "1", status: "U" },
+    { _id: 123456, name: "pendingApprovalChore", price: "1", status: "P" },
   ];
 
   return (
@@ -59,6 +61,12 @@ const App = () => {
               exact
               path="/findchore"
               element={<FindAvailableChores chores={chores} />}
+            />
+
+            <Route
+              exact
+              path="/approvechores"
+              element={<ChoresToApprove chores={chores} />}
             />
           </Switch>
         </Router>
