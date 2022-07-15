@@ -18,8 +18,11 @@ const ChoresToApprove = ({ chores }) => {
     <div className="container">
       <h2>These are the completed chores for you to approve</h2>
       <p>
-        When you accept a chore, the child will get the reward in their account
+        When you accept a chore is done, the child will get the reward in their
+        account
       </p>
+      <p>If you click reject, it will be added back onto their todo list</p>
+
       {/* mapping function to go through the chores list and render the pending chores, it would be nice to add who is doing the chore in the future */}
       {chores
         .filter((chore) => chore.status === "P")
@@ -34,7 +37,7 @@ const ChoresToApprove = ({ chores }) => {
         ))}
       <div>
         <button type="button">
-          <a href="/dashboard">Back To Dashboard</a>
+          <a href="/parentdashboard">Back To Dashboard</a>
         </button>
       </div>
     </div>

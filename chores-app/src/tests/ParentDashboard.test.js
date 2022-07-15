@@ -16,7 +16,7 @@ describe("the parents dashboard", () => {
     expect(
       screen.getByRole("button", { name: /invite new member/i })
     ).toBeInTheDocument();
-    expect(screen.getByText(/chores/i)).toBeInTheDocument();
+    expect(screen.getByText("Chores")).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /add new chore/i })
     ).toBeInTheDocument();

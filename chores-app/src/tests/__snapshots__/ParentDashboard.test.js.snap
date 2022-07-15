@@ -33,6 +33,17 @@ exports[`the parents dashboard matches the snapshot 1`] = `
         </a>
       </button>
     </div>
+    <div>
+      <button
+        type="button"
+      >
+        <a
+          href="/approvechores"
+        >
+          Manage chores pending approval
+        </a>
+      </button>
+    </div>
   </div>
 </DocumentFragment>
 `;

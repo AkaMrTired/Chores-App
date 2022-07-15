@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the parents dashboard matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <h2>
+      These are the completed chores for you to approve
+    </h2>
+    <p>
+      When you accept a chore is done, the child will get the reward in their account
+    </p>
+    <p>
+      If you click reject, it will be added back onto their todo list
+    </p>
+    <div>
+      <div>
+        pendingApprovalChore
+      </div>
+      <div>
+        £1
+      </div>
+      <button
+        type="button"
+      >
+        Accept
+      </button>
+      <button
+        type="button"
+      >
+        Reject
+      </button>
+    </div>
+    <div>
+      <button
+        type="button"
+      >
+        <a
+          href="/parentdashboard"
+        >
+          Back To Dashboard
+        </a>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

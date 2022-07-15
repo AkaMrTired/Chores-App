@@ -31,6 +31,11 @@ const ParentDashboard = ({ chores }) => {
           />
         ))}
       </div>
+      <div>
+        <button type="button">
+          <a href="/approvechores">Manage chores pending approval</a>
+        </button>
+      </div>
     </div>
   );
 };
