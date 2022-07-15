@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/App.css";
 import {
   BrowserRouter as Router,
   Routes as Switch,
   Route,
 } from "react-router-dom";
+import axios from "axios";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
 import SignUpForm from "./SignUpForm";
@@ -17,13 +18,22 @@ import FindAvailableChores from "./FindAvailableChores";
 import ChoresToApprove from "./ChoresToApprove";
 
 const App = () => {
-  const chores = [
-    // obviously this will need to change to be info from the DB
-    { _id: 123, name: "takenChore", price: "1", status: "T" },
-    { _id: 1234, name: "availableChore", price: "1", status: "A" },
-    { _id: 12345, name: "unavailableChore", price: "1", status: "U" },
-    { _id: 123456, name: "pendingApprovalChore", price: "1", status: "P" },
-  ];
+  const user = {
+    userID: 123,
+    familyID: 1234,
+    // this will be in context!!
+  };
+  const [chores, setChores] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`localhost:3300/family/${user.familyID}/chores`)
+      .then((response) => {
+        setChores(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [chores]);
 
   return (
     <div className="App">
@@ -32,7 +42,12 @@ const App = () => {
       <div id="app-container">
         <Router>
           <Switch>
-            <Route exact path="/" element={<HomePage />} />
+            <Route
+              exact
+              path="/"
+              element={<HomePage />}
+              // within the login (rendered in the homepage) the user email/password will be verified and axios request made; with the result body, setUserDetails will be used to set the userID and familyID
+            />
 
             <Route exact path="/signup" element={<SignUpForm />} />
 
