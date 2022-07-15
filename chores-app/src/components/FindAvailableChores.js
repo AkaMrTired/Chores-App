@@ -33,7 +33,7 @@ FindAvailableChores.propTypes = {
     PropTypes.shape({
       _id: PropTypes.number,
       name: PropTypes.string,
-      price: PropTypes.string,
+      price: PropTypes.number,
       status: PropTypes.string,
     })
   ).isRequired,

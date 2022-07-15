@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import "../styles/AddChoreForm.css";
 import PropTypes from "prop-types";
 
-const EditChore = ({ setEditing, name, price, status, choreID }) => {
+const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
   const initialState = {
     fields: {
       name,
       price,
       status,
+      owner,
     },
   };
   const [fields, setFields] = useState(initialState.fields);
@@ -18,7 +19,7 @@ const EditChore = ({ setEditing, name, price, status, choreID }) => {
   };
   const handleStatusSelect = (event) => {
     event.preventDefault();
-    setFields({ ...fields, status: event.target.value });
+    setFields({ ...fields, status: event.target.value, owner: null });
   };
   const cancelEdit = (event) => {
     event.preventDefault();
@@ -30,7 +31,7 @@ const EditChore = ({ setEditing, name, price, status, choreID }) => {
     console.log(`http://localhost:3300/family/:familyID/chores/${choreID}`);
     // need to add functionality to send fields to the DB
     //    axios
-    // .patch(`http://localhost:3300/family/:familyID/chores/${choreID}`, fields)
+    // .patch(`http://localhost:3300/family/${familyID-fromcontext!!}/chores/${choreID}`, fields)
     // .then((response) => {
     //   console.log(response.status);
     // })
@@ -64,7 +65,8 @@ const EditChore = ({ setEditing, name, price, status, choreID }) => {
             value={fields.price}
             onChange={handleFieldChange}
           />
-          <p>Status of the chore:</p>
+          <span>Status of the chore </span>
+          <span>note: you can not select taken if it is not already</span>
 
           <button
             type="button"
@@ -89,16 +91,15 @@ const EditChore = ({ setEditing, name, price, status, choreID }) => {
           <button
             type="button"
             className={fields.status === "T" ? "selected" : ""}
-            name="available"
+            name="Taken"
             value="T"
-            onClick={handleStatusSelect}
           >
             Taken/ assigned
           </button>
           <button
             type="button"
             className={fields.status === "P" ? "selected" : ""}
-            name="available"
+            name="Pending Approval"
             value="P"
             onClick={handleStatusSelect}
           >
@@ -122,5 +123,6 @@ EditChore.propTypes = {
   price: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   choreID: PropTypes.number.isRequired,
+  owner: PropTypes.number.isRequired,
 };
 export default EditChore;

@@ -24,10 +24,10 @@ const App = () => {
     // this will be in context!!
   };
   const [chores, setChores] = useState([
-    { _id: 123, name: "test", price: 1, status: "T", choreID: 1 },
-    { _id: 1234, name: "test", price: 1, status: "P", choreID: 2 },
-    { _id: 12345, name: "test", price: 1, status: "U", choreID: 3 },
-    { _id: 123456, name: "test", price: 1, status: "A", choreID: 4 },
+    { _id: 123, name: "test", price: 1, status: "T", choreID: 1, owner: 1 },
+    { _id: 1234, name: "test", price: 1, status: "P", choreID: 2, owner: 2 },
+    { _id: 12345, name: "test", price: 1, status: "U", choreID: 3, owner: 3 },
+    { _id: 123456, name: "test", price: 1, status: "A", choreID: 4, owner: 4 },
   ]);
   useEffect(() => {
     axios

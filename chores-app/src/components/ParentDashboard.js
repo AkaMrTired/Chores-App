@@ -22,6 +22,7 @@ const ParentDashboard = ({ chores }) => {
             price={chore.price}
             status={chore.status}
             choreID={chore.choreID}
+            owner={chore.owner}
             component="ParentDashboard"
           />
         ))}
@@ -42,8 +43,9 @@ ParentDashboard.propTypes = {
     PropTypes.shape({
       _id: PropTypes.number,
       name: PropTypes.string,
-      price: PropTypes.string,
+      price: PropTypes.number,
       status: PropTypes.string,
+      owner: PropTypes.number,
     })
   ).isRequired,
 };
