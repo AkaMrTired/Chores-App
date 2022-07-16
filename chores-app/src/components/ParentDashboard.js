@@ -3,11 +3,6 @@ import PropTypes from "prop-types";
 import ChoreCard from "./ChoreCard";
 
 const ParentDashboard = ({ chores }) => {
-  // need to add the functionality to these functions; edit button should open an edit view with populated fields based on the chore it was clicked in
-  // the delete button will remove the chore from the database, and a nice to have would be a "confirm delete".
-  const editButton = () => {};
-  const deleteButton = () => {};
-
   return (
     <div className="container">
       <h1>Dashboard</h1>
@@ -26,10 +21,16 @@ const ParentDashboard = ({ chores }) => {
             name={chore.name}
             price={chore.price}
             status={chore.status}
-            editButton={editButton}
-            deleteButton={deleteButton}
+            choreID={chore.choreID}
+            owner={chore.owner}
+            component="ParentDashboard"
           />
         ))}
+      </div>
+      <div>
+        <button type="button">
+          <a href="/approvechores">Manage chores pending approval</a>
+        </button>
       </div>
     </div>
   );
@@ -42,8 +43,9 @@ ParentDashboard.propTypes = {
     PropTypes.shape({
       _id: PropTypes.number,
       name: PropTypes.string,
-      price: PropTypes.string,
+      price: PropTypes.number,
       status: PropTypes.string,
+      owner: PropTypes.number,
     })
   ).isRequired,
 };

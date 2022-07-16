@@ -40,26 +40,26 @@ describe("the chore card component", () => {
         takeButton={validProps.emptyFunction}
       />
     );
-    expect(screen.getByText("test")).toBeInTheDocument();
+    expect(screen.getByText(/test/i)).toBeInTheDocument();
     expect(screen.getByText("£1")).toBeInTheDocument();
     expect(screen.getByText("T")).toBeInTheDocument();
-    expect(screen.getByText("edit")).toBeInTheDocument();
-    expect(screen.getByText("delete")).toBeInTheDocument();
-    expect(screen.getByText("accept")).toBeInTheDocument();
-    expect(screen.getByText("reject")).toBeInTheDocument();
-    expect(screen.getByText("done")).toBeInTheDocument();
-    expect(screen.getByText("take")).toBeInTheDocument();
+    expect(screen.getByText(/Edit/i)).toBeInTheDocument();
+    expect(screen.getByText(/Delete/i)).toBeInTheDocument();
+    expect(screen.getByText(/Accept/i)).toBeInTheDocument();
+    expect(screen.getByText(/Reject/i)).toBeInTheDocument();
+    expect(screen.getByText(/done/i)).toBeInTheDocument();
+    expect(screen.getByText(/take/i)).toBeInTheDocument();
   });
   it("doesn't render components when it isn't given the relevant prop", () => {
     render(<ChoreCard name={validProps.name} price={validProps.price} />);
     expect(screen.getByText("test")).toBeInTheDocument();
     expect(screen.getByText("£1")).toBeInTheDocument();
     expect(screen.queryByText("T")).not.toBeInTheDocument();
-    expect(screen.queryByText("edit")).not.toBeInTheDocument();
-    expect(screen.queryByText("delete")).not.toBeInTheDocument();
-    expect(screen.queryByText("accept")).not.toBeInTheDocument();
-    expect(screen.queryByText("reject")).not.toBeInTheDocument();
-    expect(screen.queryByText("done")).not.toBeInTheDocument();
-    expect(screen.queryByText("take")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Edit/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Delete/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Accept/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Reject/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/done/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/take/i)).not.toBeInTheDocument();
   });
 });

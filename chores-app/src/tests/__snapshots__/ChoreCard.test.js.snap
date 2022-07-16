@@ -15,32 +15,32 @@ exports[`the chore card component matches the screenshot 1`] = `
     <button
       type="button"
     >
-      edit
+      Edit
     </button>
     <button
       type="button"
     >
-      delete
+      Delete
     </button>
     <button
       type="button"
     >
-      accept
+      Accept
     </button>
     <button
       type="button"
     >
-      reject
+      Reject
     </button>
     <button
       type="button"
     >
-      done
+      Done
     </button>
     <button
       type="button"
     >
-      take
+      Take
     </button>
   </div>
 </DocumentFragment>

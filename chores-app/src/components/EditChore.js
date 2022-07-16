@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import "../styles/AddChoreForm.css";
+import PropTypes from "prop-types";
 
-const AddChoreForm = () => {
+const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
   const initialState = {
     fields: {
-      name: "",
-      price: "",
-      status: "U",
-      // familyId: familyId from useContext
+      name,
+      price,
+      status,
+      owner,
     },
   };
   const [fields, setFields] = useState(initialState.fields);
@@ -18,15 +19,19 @@ const AddChoreForm = () => {
   };
   const handleStatusSelect = (event) => {
     event.preventDefault();
-    setFields({ ...fields, status: event.target.value });
+    setFields({ ...fields, status: event.target.value, owner: null });
+  };
+  const cancelEdit = (event) => {
+    event.preventDefault();
+    setEditing(false);
   };
 
-  const [successMessage, setSuccessmessage] = useState("");
-
   const handleSubmit = (event) => {
+    console.log(fields);
+    console.log(`http://localhost:3300/family/:familyID/chores/${choreID}`);
     // need to add functionality to send fields to the DB
     //    axios
-    // .post("localhost:3300/chores", fields)
+    // .patch(`http://localhost:3300/family/${familyID-fromcontext!!}/chores/${choreID}`, fields)
     // .then((response) => {
     //   console.log(response.status);
     // })
@@ -34,10 +39,7 @@ const AddChoreForm = () => {
     //   console.log(404);
     // });
     event.preventDefault();
-    setSuccessmessage(
-      `Success, you have added a chore. You can make another, or return to your dashboard`
-    );
-    setFields(initialState.fields);
+    setEditing(false);
   };
 
   return (
@@ -50,7 +52,7 @@ const AddChoreForm = () => {
             type="text"
             name="name"
             required
-            placeholder="e.g. hoover the lounge"
+            placeholder={fields.name}
             value={fields.name}
             onChange={handleFieldChange}
           />
@@ -59,11 +61,12 @@ const AddChoreForm = () => {
             type="text"
             name="price"
             required
-            placeholder="e.g. 5"
+            placeholder={fields.price}
             value={fields.price}
             onChange={handleFieldChange}
           />
-          <p>Select if your chore will be available or unavailable to begin</p>
+          <span>Status of the chore </span>
+          <span>note: you can not select taken if it is not already</span>
 
           <button
             type="button"
@@ -85,17 +88,41 @@ const AddChoreForm = () => {
             Unavailable
           </button>
 
-          <button type="submit">Save chore</button>
+          <button
+            type="button"
+            className={fields.status === "T" ? "selected" : ""}
+            name="Taken"
+            value="T"
+          >
+            Taken/ assigned
+          </button>
+          <button
+            type="button"
+            className={fields.status === "P" ? "selected" : ""}
+            name="Pending Approval"
+            value="P"
+            onClick={handleStatusSelect}
+          >
+            Pending approval
+          </button>
+          <div>
+            <button type="submit">Save chore</button>
+            <button type="button" onClick={cancelEdit}>
+              Cancel
+            </button>
+          </div>
         </form>
-      </div>
-      <div>{successMessage && successMessage}</div>
-      <div>
-        <button type="button">
-          <a href="/parentdashboard">Back To Dashboard</a>
-        </button>
       </div>
     </div>
   );
 };
 
-export default AddChoreForm;
+EditChore.propTypes = {
+  setEditing: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
+  choreID: PropTypes.number.isRequired,
+  owner: PropTypes.number.isRequired,
+};
+export default EditChore;

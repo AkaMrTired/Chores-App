@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
+import axios from "axios";
 
 const AddNewMemberForm = () => {
   const initialState = {
@@ -15,11 +16,18 @@ const AddNewMemberForm = () => {
   const sendEmail = async () => {
     try {
       const emailParams = {
-        // TO DO: add logic to create the correct link
-        link: "placeholder.com",
+        // DECIDED TO SIMPLIFY -> user will click on the link and we will match to correct account to patch based on email
+        link: `http://localhost:3000/newmembersignup?email=${fields.email}`,
         email: fields.email,
       };
-      // TO DO: add some axios code to go here to send the field data to the database
+      axios
+        .post("localhost:3300/users", fields)
+        .then((response) => {
+          console.log(response.status);
+        })
+        .catch(() => {
+          console.log(404);
+        });
       await emailjs.send(
         process.env.REACT_APP_EMAIL_SERVICE_ID,
         process.env.REACT_APP_EMAIL_TEMPLATE_ID,
