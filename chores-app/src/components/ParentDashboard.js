@@ -17,7 +17,7 @@ const ParentDashboard = ({ chores }) => {
         {/* mapping function to go through the chores list and render them. */}
         {chores.map((chore) => (
           <ChoreCard
-            key={chore._id}
+            key={chore.choreID}
             name={chore.name}
             price={chore.price}
             status={chore.status}

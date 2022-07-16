@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
+import { auth } from "../firebase-config";
 
-const SignUpForm = () => {
+// eslint-disable-next-line react/prop-types
+const SignUpForm = ({ createUserWithEmailAndPassword }) => {
   const initialState = {
     fields: {
       familyName: "",
@@ -12,28 +14,46 @@ const SignUpForm = () => {
     },
   };
   const [fields, setFields] = useState(initialState.fields);
-  const [passwordError, setPasswordError] = useState();
+  const [error, setError] = useState();
   const [success, setSuccess] = useState(false);
-
-  const createAccount = (event) => {
+  const registration = async (event) => {
+    event.preventDefault();
     if (fields.password === fields.confirmPassword) {
-      // some axios code to go here to send the field data to the database
-      // axios;
-      // .post("http://localhost:3300/user", fields)
-      // .then((response) => {
-      //   console.log(response.status);
-      // })
-      // .catch(() => {
-      //   console.log(404);
-      // });
-      // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
-      setFields(initialState.fields);
-      setSuccess(true);
+      try {
+        const user = await createUserWithEmailAndPassword(
+          auth,
+          fields.yourEmail,
+          fields.password
+        );
+        console.log(user.uid);
+        setSuccess(true);
+      } catch (e) {
+        setError(e.message);
+      }
     } else {
-      event.preventDefault();
-      setPasswordError("Those passwords did not match, please try again");
+      setError("Those passwords did not match, please try again");
     }
   };
+
+  // const createAccount = (event) => {
+  //  event.preventDefault();
+  //   {
+  //     registration();
+  //     // some axios code to go here to send the field data to the database
+  //     // axios;
+  //     // .post("http://localhost:3300/user", the email & (firebase) uid)
+  //     // .then((response) => {
+  //     //   console.log(response.status);
+  //     // })
+  //     // .catch(() => {
+  //     //   console.log(404);
+  //     // });
+  //     // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
+
+  //     setFields(initialState.fields);
+  //     setSuccess(true);
+  //   }
+  // };
   const handleFieldChange = (event) => {
     event.preventDefault();
     setFields({ ...fields, [event.target.name]: event.target.value });
@@ -46,7 +66,9 @@ const SignUpForm = () => {
           <h1>Success</h1>
           <div>
             <button type="button">
-              <a href="/">click here to sign into your new account</a>
+              <a href="/parentdashboard">
+                click here to access your new account
+              </a>
             </button>
           </div>
         </>
@@ -55,7 +77,7 @@ const SignUpForm = () => {
         <>
           <h1>Sign Up</h1>
           <div>
-            <form onSubmit={createAccount}>
+            <form onSubmit={registration}>
               <label htmlFor="familyName">Family Name </label>
               <input
                 name="familyName"
@@ -87,7 +109,7 @@ const SignUpForm = () => {
               />
 
               <label htmlFor="password">
-                Password (minimum 5 characters, must contain a letter and a
+                Password (minimum 6 characters, must contain a letter and a
                 number)
               </label>
               <input
@@ -96,7 +118,7 @@ const SignUpForm = () => {
                 data-testid="password"
                 required
                 placeholder="*******"
-                minLength="5"
+                minLength="6"
                 pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
                 value={fields.password}
                 onChange={handleFieldChange}
@@ -111,7 +133,7 @@ const SignUpForm = () => {
                 value={fields.confirmPassword}
                 onChange={handleFieldChange}
               />
-              {!!passwordError && <p>{passwordError}</p>}
+              {!!error && <p>{error}</p>}
 
               <button type="submit">Create Account</button>
             </form>

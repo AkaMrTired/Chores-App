@@ -5,7 +5,14 @@ import {
   Routes as Switch,
   Route,
 } from "react-router-dom";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 import axios from "axios";
+import { auth } from "../firebase-config";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
 import SignUpForm from "./SignUpForm";
@@ -23,12 +30,13 @@ const App = () => {
     familyID: 1234,
     // this will be in context!!
   };
-  const [chores, setChores] = useState([
-    { _id: 123, name: "test", price: 1, status: "T", choreID: 1, owner: 1 },
-    { _id: 1234, name: "test", price: 1, status: "P", choreID: 2, owner: 2 },
-    { _id: 12345, name: "test", price: 1, status: "U", choreID: 3, owner: 3 },
-    { _id: 123456, name: "test", price: 1, status: "A", choreID: 4, owner: 4 },
-  ]);
+  const [firebaseUser, setFirebaseUser] = useState({});
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setFirebaseUser(currentUser);
+    console.log({ firebaseUser });
+  });
+  const [chores, setChores] = useState([]);
   useEffect(() => {
     axios
       .get(`http://localhost:3300/family/${user.familyID}/chores`)
@@ -40,10 +48,9 @@ const App = () => {
       });
   }, [user.familyID]);
   // need to watch incase this doesn't call the updated chores from the DB when the parent edits.
-
   return (
     <div className="App">
-      <Nav />
+      <Nav firebaseUser={firebaseUser} signOut={signOut} />
 
       <div id="app-container">
         <Router>
@@ -51,11 +58,25 @@ const App = () => {
             <Route
               exact
               path="/"
-              element={<HomePage />}
+              element={
+                <HomePage
+                  signInWithEmailAndPassword={signInWithEmailAndPassword}
+                />
+              }
               // within the login (rendered in the homepage) the user email/password will be verified and axios request made; with the result body, setUserDetails will be used to set the userID and familyID
             />
 
-            <Route exact path="/signup" element={<SignUpForm />} />
+            <Route
+              exact
+              path="/signup"
+              element={
+                <SignUpForm
+                  createUserWithEmailAndPassword={
+                    createUserWithEmailAndPassword
+                  }
+                />
+              }
+            />
 
             <Route exact path="/newmember" element={<AddNewMemberForm />} />
             <Route
@@ -69,7 +90,13 @@ const App = () => {
             <Route
               exact
               path="/newmembersignup"
-              element={<NewMemberSignUp />}
+              element={
+                <NewMemberSignUp
+                  createUserWithEmailAndPassword={
+                    createUserWithEmailAndPassword
+                  }
+                />
+              }
             />
 
             <Route

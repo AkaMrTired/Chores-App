@@ -1,41 +1,67 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { auth } from "../firebase-config";
 
-const NewMemberSignUp = () => {
+// eslint-disable-next-line react/prop-types
+const NewMemberSignUp = ({ createUserWithEmailAndPassword }) => {
   const [searchParams] = useSearchParams();
   const userEmail = searchParams.get("email");
+  const userRole = searchParams.get("role");
 
   const initialState = {
     fields: {
       email: userEmail,
+      role: userRole,
       yourName: "",
       password: "",
       confirmPassword: "",
     },
   };
   const [fields, setFields] = useState(initialState.fields);
-  const [passwordError, setPasswordError] = useState();
+  const [error, setError] = useState();
   const [success, setSuccess] = useState(false);
 
-  const completeAccount = (event) => {
+  const registration = async (event) => {
+    event.preventDefault();
     if (fields.password === fields.confirmPassword) {
-      // some axios code to go here to send the field data to the database
-      // axios;
-      // .put/patch("http://localhost:3300/user", fields)
-      // .then((response) => {
-      //   console.log(response.status);
-      // })
-      // .catch(() => {
-      //   console.log(404);
-      // });
-      // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
-      setSuccess(true);
+      try {
+        const user = await createUserWithEmailAndPassword(
+          auth,
+          fields.email,
+          fields.password
+        );
+        console.log(user);
+        setSuccess(true);
+      } catch (e) {
+        console.log(e.message);
+        setError("An error occurred");
+      }
     } else {
-      event.preventDefault();
-      setPasswordError("Those passwords did not match, please try again");
+      setError("Those passwords did not match, please try again");
     }
   };
+
+  // const createAccount = (event) => {
+  //  event.preventDefault();
+  //   {
+  //     registration();
+  //     // some axios code to go here to send the field data to the database
+  //     // axios;
+  //     // .post("http://localhost:3300/user", fields)
+  //     // .then((response) => {
+  //     //   console.log(response.status);
+  //     // })
+  //     // .catch(() => {
+  //     //   console.log(404);
+  //     // });
+  //     // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
+
+  //     setFields(initialState.fields);
+  //     setSuccess(true);
+  //   }
+  // };
+
   const handleFieldChange = (event) => {
     event.preventDefault();
     setFields({ ...fields, [event.target.name]: event.target.value });
@@ -43,12 +69,38 @@ const NewMemberSignUp = () => {
 
   return (
     <div className="sign-up-container">
-      {success && (
+      {success && userRole === "parent" && (
         <>
           <h1>Success</h1>
           <div>
-            <button type="button">
-              <a href="/">click here to sign into your new account</a>
+            <button
+              type="button"
+              onClick={
+                console.log("placeholder for code")
+                // axios.get -> user account info & set it in context?
+              }
+            >
+              <a href="/parentdashboard">
+                click here to access your new account
+              </a>
+            </button>
+          </div>
+        </>
+      )}
+      {success && userRole === "child" && (
+        <>
+          <h1>Success</h1>
+          <div>
+            <button
+              type="button"
+              onClick={
+                console.log("placeholder for code")
+                // axios.get -> user account info & set it in context?
+              }
+            >
+              <a href="/childdashboard">
+                click here to access your new account
+              </a>
             </button>
           </div>
         </>
@@ -61,7 +113,7 @@ const NewMemberSignUp = () => {
             and password
           </p>
           <div>
-            <form onSubmit={completeAccount}>
+            <form onSubmit={registration}>
               <label htmlFor="yourName">Your Name </label>
               <input
                 name="yourName"
@@ -97,7 +149,7 @@ const NewMemberSignUp = () => {
                 value={fields.confirmPassword}
                 onChange={handleFieldChange}
               />
-              {!!passwordError && <p>{passwordError}</p>}
+              {!!error && <p>{error}</p>}
               <button type="submit">Complete Account</button>
             </form>
           </div>

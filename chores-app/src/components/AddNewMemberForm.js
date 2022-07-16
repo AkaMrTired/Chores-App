@@ -17,7 +17,7 @@ const AddNewMemberForm = () => {
     try {
       const emailParams = {
         // DECIDED TO SIMPLIFY -> user will click on the link and we will match to correct account to patch based on email
-        link: `http://localhost:3000/newmembersignup?email=${fields.email}`,
+        link: `http://localhost:3000/newmembersignup?email=${fields.email}&role=${fields.role}`,
         email: fields.email,
       };
       axios

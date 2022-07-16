@@ -17,6 +17,13 @@ const ChildDashboard = ({ chores }) => {
   return (
     <div className="container">
       <h1>Dashboard</h1>
+      <h2>
+        Balance £
+        {
+          // user.balance
+        }
+      </h2>
+
       <form onSubmit={handleRequest}>
         <label htmlFor="requestedamount">
           £
@@ -39,15 +46,19 @@ const ChildDashboard = ({ chores }) => {
         <button type="button">
           <a href="/findchore">Find a new chore!</a>
         </button>
-        {/* mapping function to go through the chores list and render them where the user is assigned to the chore e.g. chore.owner===userId */}
-        {chores.map((chore) => (
-          <ChoreCard
-            key={chore._id}
-            name={chore.name}
-            price={chore.price}
-            component="ChildDashboard"
-          />
-        ))}
+        {/* mapping function to go through the chores list and render them where the user is assigned to the chore e.g. chore.owner===userId FROM CONTEXT */}
+        {chores
+          // .filter((chore) =>
+          //   chore.owner === userID;
+          // )
+          .map((chore) => (
+            <ChoreCard
+              key={chore.choreID}
+              name={chore.name}
+              price={chore.price}
+              component="ChildDashboard"
+            />
+          ))}
       </div>
     </div>
   );
