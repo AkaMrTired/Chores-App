@@ -15,7 +15,6 @@ const SignUpForm = () => {
   };
   const [fields, setFields] = useState(initialState.fields);
   const [error, setError] = useState();
-  const [success, setSuccess] = useState(false);
 
   const { signUp } = useUserAuth();
   const navigate = useNavigate();
@@ -25,8 +24,7 @@ const SignUpForm = () => {
     if (fields.password === fields.confirmPassword) {
       try {
         await signUp(fields.yourEmail, fields.password);
-        navigate("/");
-        setSuccess(true);
+        navigate("/parentdashboard");
       } catch (e) {
         setError(e.message);
       }
@@ -61,89 +59,72 @@ const SignUpForm = () => {
 
   return (
     <div className="sign-up-container">
-      {success && (
-        <>
-          <h1>Success</h1>
-          <div>
-            <button type="button">
-              <a href="/parentdashboard">
-                click here to access your new account
-              </a>
-            </button>
-          </div>
-        </>
-      )}
-      {!success && (
-        <>
-          <h1>Sign Up</h1>
-          <div>
-            <form onSubmit={registration}>
-              <label htmlFor="familyName">Family Name </label>
-              <input
-                name="familyName"
-                required
-                type="text"
-                placeholder="e.g. The Cool Gang"
-                value={fields.familyName}
-                onChange={handleFieldChange}
-              />
+      <h1>Sign Up</h1>
+      <div>
+        <form onSubmit={registration}>
+          <label htmlFor="familyName">Family Name </label>
+          <input
+            name="familyName"
+            required
+            type="text"
+            placeholder="e.g. The Cool Gang"
+            value={fields.familyName}
+            onChange={handleFieldChange}
+          />
 
-              <label htmlFor="yourName">Your Name </label>
-              <input
-                name="yourName"
-                required
-                type="text"
-                placeholder="e.g Mommy"
-                value={fields.yourName}
-                onChange={handleFieldChange}
-              />
+          <label htmlFor="yourName">Your Name </label>
+          <input
+            name="yourName"
+            required
+            type="text"
+            placeholder="e.g Mommy"
+            value={fields.yourName}
+            onChange={handleFieldChange}
+          />
 
-              <label htmlFor="yourEmail">Your Email</label>
-              <input
-                type="email"
-                name="yourEmail"
-                required
-                placeholder="e.g example@example.com"
-                value={fields.email}
-                onChange={handleFieldChange}
-              />
+          <label htmlFor="yourEmail">Your Email</label>
+          <input
+            type="email"
+            name="yourEmail"
+            required
+            placeholder="e.g example@example.com"
+            value={fields.email}
+            onChange={handleFieldChange}
+          />
 
-              <label htmlFor="password">
-                Password (minimum 6 characters, must contain a letter and a
-                number)
-              </label>
-              <input
-                type="password"
-                name="password"
-                data-testid="password"
-                required
-                placeholder="*******"
-                minLength="6"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
-                value={fields.password}
-                onChange={handleFieldChange}
-              />
+          <label htmlFor="password">
+            Password (minimum 6 characters, must contain a letter and a number)
+          </label>
+          <input
+            type="password"
+            name="password"
+            data-testid="password"
+            required
+            placeholder="*******"
+            minLength="6"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
+            value={fields.password}
+            onChange={handleFieldChange}
+          />
 
-              <label htmlFor="confirmPassword">Confirm Password </label>
-              <input
-                type="password"
-                name="confirmPassword"
-                required
-                placeholder="*******"
-                value={fields.confirmPassword}
-                onChange={handleFieldChange}
-              />
-              {!!error && <p>{error}</p>}
+          <label htmlFor="confirmPassword">Confirm Password </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            required
+            placeholder="*******"
+            value={fields.confirmPassword}
+            onChange={handleFieldChange}
+          />
+          {!!error && <p>{error}</p>}
 
-              <button type="submit">Create Account</button>
-            </form>
-          </div>
-          <p>
-            You will be able to invite more family members once you make your
-            account.
-          </p>
-        </>
-      )}
+          <button type="submit">Create Account</button>
+        </form>
+      </div>
+      <p>
+        You will be able to invite more family members once you make your
+        account.
+      </p>
     </div>
   );
 };

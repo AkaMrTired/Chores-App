@@ -20,7 +20,6 @@ const NewMemberSignUp = () => {
   };
   const [fields, setFields] = useState(initialState.fields);
   const [error, setError] = useState();
-  const [success, setSuccess] = useState(false);
 
   const { signUp } = useUserAuth();
   const navigate = useNavigate();
@@ -30,8 +29,11 @@ const NewMemberSignUp = () => {
     if (fields.password === fields.confirmPassword) {
       try {
         await signUp(fields.yourEmail, fields.password);
-        navigate("/");
-        setSuccess(true);
+        if (userRole === "parent") {
+          navigate("/parentdashboard");
+        } else {
+          navigate("/childdashboard");
+        }
       } catch (e) {
         setError(e.message);
       }
@@ -68,92 +70,51 @@ const NewMemberSignUp = () => {
 
   return (
     <div className="sign-up-container">
-      {success && userRole === "parent" && (
-        <>
-          <h1>Success</h1>
-          <div>
-            <button
-              type="button"
-              onClick={
-                console.log("placeholder for code")
-                // axios.get -> user account info & set it in context?
-              }
-            >
-              <a href="/parentdashboard">
-                click here to access your new account
-              </a>
-            </button>
-          </div>
-        </>
-      )}
-      {success && userRole === "child" && (
-        <>
-          <h1>Success</h1>
-          <div>
-            <button
-              type="button"
-              onClick={
-                console.log("placeholder for code")
-                // axios.get -> user account info & set it in context?
-              }
-            >
-              <a href="/childdashboard">
-                click here to access your new account
-              </a>
-            </button>
-          </div>
-        </>
-      )}
-      {!success && (
-        <>
-          <h1>Sign Up</h1>
-          <p>
-            Please finish creating your account by setting your preferred name
-            and password
-          </p>
-          <div>
-            <form onSubmit={registration}>
-              <label htmlFor="yourName">Your Name </label>
-              <input
-                name="yourName"
-                required
-                type="text"
-                placeholder="e.g Mommy"
-                value={fields.yourName}
-                onChange={handleFieldChange}
-              />
+      <h1>Sign Up</h1>
+      <p>
+        Please finish creating your account by setting your preferred name and
+        password
+      </p>
+      <div>
+        <form onSubmit={registration}>
+          <label htmlFor="yourName">Your Name </label>
+          <input
+            name="yourName"
+            required
+            type="text"
+            placeholder="e.g Mommy"
+            value={fields.yourName}
+            onChange={handleFieldChange}
+          />
 
-              <label htmlFor="password">
-                Password (minimum 5 characters, must contain a letter and a
-                number)
-              </label>
-              <input
-                type="password"
-                name="password"
-                data-testid="password"
-                required
-                placeholder="*******"
-                minLength="5"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
-                value={fields.password}
-                onChange={handleFieldChange}
-              />
+          <label htmlFor="password">
+            Password (minimum 5 characters, must contain a letter and a number)
+          </label>
+          <input
+            type="password"
+            name="password"
+            data-testid="password"
+            required
+            placeholder="*******"
+            minLength="5"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
+            value={fields.password}
+            onChange={handleFieldChange}
+          />
 
-              <label htmlFor="confirmPassword">Confirm Password </label>
-              <input
-                type="password"
-                name="confirmPassword"
-                required
-                placeholder="*******"
-                value={fields.confirmPassword}
-                onChange={handleFieldChange}
-              />
-              {!!error && <p>{error}</p>}
-              <button type="submit">Complete Account</button>
-            </form>
-          </div>
-        </>
-      )}
+          <label htmlFor="confirmPassword">Confirm Password </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            required
+            placeholder="*******"
+            value={fields.confirmPassword}
+            onChange={handleFieldChange}
+          />
+          {!!error && <p>{error}</p>}
+          <button type="submit">Complete Account</button>
+        </form>
+      </div>
     </div>
   );
 };
