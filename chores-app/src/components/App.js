@@ -24,6 +24,7 @@ const App = () => {
 
   useEffect(() => {
     if (familyID) {
+      console.log({ familyID });
       axios
         .get(`http://localhost:3300/family/${familyID}/chores`)
         .then((response) => {
@@ -32,6 +33,8 @@ const App = () => {
         .catch((e) => {
           console.log(e);
         });
+    } else {
+      console.log({ familyID });
     }
   }, [familyID]);
 

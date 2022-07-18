@@ -12,7 +12,7 @@ const userAuthContext = createContext();
 // eslint-disable-next-line react/prop-types
 export const UserAuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  const [familyID, setFamilyID] = useState(1234);
+  const [familyID, setFamilyID] = useState();
 
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
@@ -23,14 +23,15 @@ export const UserAuthContextProvider = ({ children }) => {
   function logOut() {
     return signOut(auth);
   }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       if (currentuser) {
         setUser(currentuser.uid);
-        console.log("user:", currentuser.uid);
+        console.log("firebase user:", currentuser.uid);
       } else {
         setUser(null);
-        console.log("user:", null);
+        console.log("firebase user:", null);
       }
     });
     return () => {

@@ -41,7 +41,7 @@ const AddChoreForm = () => {
       })
       .catch((e) => {
         console.log(".catch=", e);
-        setSuccessMessage("an error ocurred", e);
+        setSuccessMessage("an error occurred", e);
       });
     setFields(initialState.fields);
   };
