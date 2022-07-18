@@ -12,6 +12,7 @@ const userAuthContext = createContext();
 // eslint-disable-next-line react/prop-types
 export const UserAuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [familyID, setFamilyID] = useState(1234);
 
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
@@ -40,7 +41,7 @@ export const UserAuthContextProvider = ({ children }) => {
   return (
     <userAuthContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
-      value={{ user, logIn, signUp, logOut }}
+      value={{ user, familyID, setFamilyID, logIn, signUp, logOut }}
     >
       {children}
     </userAuthContext.Provider>
