@@ -5,14 +5,8 @@ import {
   Routes as Switch,
   Route,
 } from "react-router-dom";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from "firebase/auth";
 import axios from "axios";
-import { auth } from "../firebase-config";
+import { UserAuthContextProvider } from "../context/UserAuthContext";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
 import SignUpForm from "./SignUpForm";
@@ -30,12 +24,7 @@ const App = () => {
     familyID: 1234,
     // this will be in context!!
   };
-  const [firebaseUser, setFirebaseUser] = useState({});
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setFirebaseUser(currentUser);
-    console.log({ firebaseUser });
-  });
   const [chores, setChores] = useState([]);
   useEffect(() => {
     axios
@@ -50,75 +39,57 @@ const App = () => {
   // need to watch incase this doesn't call the updated chores from the DB when the parent edits.
   return (
     <div className="App">
-      <Nav firebaseUser={firebaseUser} signOut={signOut} />
+      <UserAuthContextProvider>
+        <Nav />
 
-      <div id="app-container">
-        <Router>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              element={
-                <HomePage
-                  signInWithEmailAndPassword={signInWithEmailAndPassword}
-                />
-              }
-              // within the login (rendered in the homepage) the user email/password will be verified and axios request made; with the result body, setUserDetails will be used to set the userID and familyID
-            />
+        <div id="app-container">
+          <Router>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                element={<HomePage />}
+                // within the login (rendered in the homepage) the user email/password will be verified and axios request made; with the result body, setUserDetails will be used to set the userID and familyID
+              />
 
-            <Route
-              exact
-              path="/signup"
-              element={
-                <SignUpForm
-                  createUserWithEmailAndPassword={
-                    createUserWithEmailAndPassword
-                  }
-                />
-              }
-            />
+              <Route exact path="/signup" element={<SignUpForm />} />
 
-            <Route exact path="/newmember" element={<AddNewMemberForm />} />
-            <Route
-              exact
-              path="/parentdashboard"
-              element={<ParentDashboard chores={chores} />}
-            />
+              <Route exact path="/newmember" element={<AddNewMemberForm />} />
+              <Route
+                exact
+                path="/parentdashboard"
+                element={<ParentDashboard chores={chores} />}
+              />
 
-            <Route exact path="/addchore" element={<AddChoreForm />} />
+              <Route exact path="/addchore" element={<AddChoreForm />} />
 
-            <Route
-              exact
-              path="/newmembersignup"
-              element={
-                <NewMemberSignUp
-                  createUserWithEmailAndPassword={
-                    createUserWithEmailAndPassword
-                  }
-                />
-              }
-            />
+              <Route
+                exact
+                path="/newmembersignup"
+                element={<NewMemberSignUp />}
+              />
 
-            <Route
-              exact
-              path="/childdashboard"
-              element={<ChildDashboard chores={chores} />}
-            />
+              <Route
+                exact
+                path="/childdashboard"
+                element={<ChildDashboard chores={chores} />}
+              />
 
-            <Route
-              exact
-              path="/findchore"
-              element={<FindAvailableChores chores={chores} />}
-            />
+              <Route
+                exact
+                path="/findchore"
+                element={<FindAvailableChores chores={chores} />}
+              />
 
-            <Route
-              exact
-              path="/approvechores"
-              element={<ChoresToApprove chores={chores} />}
-            />
-          </Switch>
-        </Router>
-      </div>
+              <Route
+                exact
+                path="/approvechores"
+                element={<ChoresToApprove chores={chores} />}
+              />
+            </Switch>
+          </Router>
+        </div>
+      </UserAuthContextProvider>
     </div>
   );
 };

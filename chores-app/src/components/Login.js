@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase-config";
+import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../context/UserAuthContext";
 
-// eslint-disable-next-line react/prop-types
 const Login = () => {
+  const { logIn, user } = useUserAuth();
+  const navigate = useNavigate();
+
   const initialState = {
     fields: {
       email: "",
@@ -14,13 +16,11 @@ const Login = () => {
   // const userRole = "parent"; // to check on functionality - should come from context
   // const [success, setSuccess] = useState(false);
   const [fields, setFields] = useState(initialState.fields);
-  const logIn = async () => {
+  const handleLogIn = async (event) => {
+    event.preventDefault();
     try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        fields.email,
-        fields.password
-      );
+      await logIn(fields.email, fields.password);
+      navigate("/parentdashboard");
       console.log(user);
       // needs to axios.get and set context for the app.
       // setSuccess(true);
@@ -36,7 +36,7 @@ const Login = () => {
     console.log({ fields });
   };
   return (
-    <form onSubmit={logIn}>
+    <form onSubmit={handleLogIn}>
       <label htmlFor="email">Your Email</label>
       <input
         type="email"

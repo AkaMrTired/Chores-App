@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
-import { auth } from "../firebase-config";
+import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../context/UserAuthContext";
 
-// eslint-disable-next-line react/prop-types
-const SignUpForm = ({ createUserWithEmailAndPassword }) => {
+const SignUpForm = () => {
   const initialState = {
     fields: {
       familyName: "",
@@ -16,16 +16,16 @@ const SignUpForm = ({ createUserWithEmailAndPassword }) => {
   const [fields, setFields] = useState(initialState.fields);
   const [error, setError] = useState();
   const [success, setSuccess] = useState(false);
+
+  const { signUp } = useUserAuth();
+  const navigate = useNavigate();
+
   const registration = async (event) => {
     event.preventDefault();
     if (fields.password === fields.confirmPassword) {
       try {
-        const user = await createUserWithEmailAndPassword(
-          auth,
-          fields.yourEmail,
-          fields.password
-        );
-        console.log(user.uid);
+        await signUp(fields.yourEmail, fields.password);
+        navigate("/");
         setSuccess(true);
       } catch (e) {
         setError(e.message);

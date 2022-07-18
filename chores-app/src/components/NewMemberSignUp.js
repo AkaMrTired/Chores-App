@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { auth } from "../firebase-config";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { useUserAuth } from "../context/UserAuthContext";
 
 // eslint-disable-next-line react/prop-types
-const NewMemberSignUp = ({ createUserWithEmailAndPassword }) => {
+const NewMemberSignUp = () => {
   const [searchParams] = useSearchParams();
   const userEmail = searchParams.get("email");
   const userRole = searchParams.get("role");
@@ -22,20 +22,18 @@ const NewMemberSignUp = ({ createUserWithEmailAndPassword }) => {
   const [error, setError] = useState();
   const [success, setSuccess] = useState(false);
 
+  const { signUp } = useUserAuth();
+  const navigate = useNavigate();
+
   const registration = async (event) => {
     event.preventDefault();
     if (fields.password === fields.confirmPassword) {
       try {
-        const user = await createUserWithEmailAndPassword(
-          auth,
-          fields.email,
-          fields.password
-        );
-        console.log(user);
+        await signUp(fields.yourEmail, fields.password);
+        navigate("/");
         setSuccess(true);
       } catch (e) {
-        console.log(e.message);
-        setError("An error occurred");
+        setError(e.message);
       }
     } else {
       setError("Those passwords did not match, please try again");
@@ -52,6 +50,7 @@ const NewMemberSignUp = ({ createUserWithEmailAndPassword }) => {
   //     // .then((response) => {
   //     //   console.log(response.status);
   //     // })
+  //     //.then(navigate("/releventdashboard, populated with user.uid");)
   //     // .catch(() => {
   //     //   console.log(404);
   //     // });
