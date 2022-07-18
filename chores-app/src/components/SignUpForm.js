@@ -25,19 +25,38 @@ const SignUpForm = () => {
     if (fields.password === fields.confirmPassword) {
       try {
         await signUp(fields.yourEmail, fields.password);
-        await axios
+        axios
           .post(`http://localhost:3300/family`, {
             familyName: fields.familyName,
           })
           .then((response) => {
             const { familyID } = response.data;
+            console.log("line34", familyID);
             localStorage.setItem("familyID", JSON.stringify(familyID));
+            const requestBody = {
+              email: fields.yourEmail,
+              name: fields.yourName,
+              role: "child",
+            };
+            return axios.post(
+              `http://localhost:3300/family/${familyID}/users`,
+              requestBody
+            );
+          })
+          .then((response) => {
+            const [{ userID }] = response.data;
+            console.log(userID);
+            const [{ role }] = response.data;
+            if (role === "parent") {
+              navigate("/parentdashboard");
+            } else {
+              navigate("/childdashboard");
+            }
           })
           .catch((e) => {
             console.log(e);
             event.preventDefault();
           });
-        navigate("/parentdashboard");
       } catch (e) {
         setError(e.message);
       }

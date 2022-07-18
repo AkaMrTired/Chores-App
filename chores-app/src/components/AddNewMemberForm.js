@@ -7,27 +7,40 @@ const AddNewMemberForm = () => {
   const initialState = {
     fields: {
       role: "Choose a role",
+      name: "",
       email: "",
     },
   };
   const [fields, setFields] = useState(initialState.fields);
   const [roleError, setRoleError] = useState();
   const [message, setMessage] = useState();
+  const familyID = localStorage.getItem("familyID");
+  const [userIDForEmail, setUserIDForEmail] = useState();
   const sendEmail = async () => {
     try {
-      const emailParams = {
-        // DECIDED TO SIMPLIFY -> user will click on the link and we will match to correct account to patch based on email
-        link: `http://localhost:3000/newmembersignup?email=${fields.email}&role=${fields.role}`,
-        email: fields.email,
-      };
       axios
-        .post("localhost:3300/users", fields)
+        .post(`localhost:3300/family/${familyID}/users`, fields)
         .then((response) => {
           console.log(response.status);
+          return axios.get(
+            `localhost:3300/family/${familyID}/users`,
+            fields.email
+          );
+        })
+        .then((response) => {
+          const [{ userID }] = response.data;
+          setUserIDForEmail(userID);
         })
         .catch(() => {
           console.log(404);
         });
+
+      const emailParams = {
+        // DECIDED TO SIMPLIFY -> user will click on the link and we will match to correct account to patch based on email
+        link: `http://localhost:3000/newmembersignup?userID=${userIDForEmail}`,
+        email: fields.email,
+      };
+
       await emailjs.send(
         process.env.REACT_APP_EMAIL_SERVICE_ID,
         process.env.REACT_APP_EMAIL_TEMPLATE_ID,
@@ -62,6 +75,15 @@ const AddNewMemberForm = () => {
       <h1>Invite New Member</h1>
       <div>
         <form onSubmit={handleSubmit}>
+          <label htmlFor="name">Their Name </label>
+          <input
+            name="name"
+            required
+            type="text"
+            placeholder="e.g Danny"
+            value={fields.yourName}
+            onChange={handleFieldChange}
+          />
           <label htmlFor="role">Role</label>
           <select
             required
