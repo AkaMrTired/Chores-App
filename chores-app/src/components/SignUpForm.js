@@ -17,7 +17,7 @@ const SignUpForm = () => {
   const [fields, setFields] = useState(initialState.fields);
   const [error, setError] = useState();
 
-  const { signUp, setFamilyID } = useUserAuth();
+  const { signUp } = useUserAuth();
   const navigate = useNavigate();
 
   const registration = async (event) => {
@@ -30,7 +30,8 @@ const SignUpForm = () => {
             familyName: fields.familyName,
           })
           .then((response) => {
-            setFamilyID(response.data.familyID);
+            const { familyID } = response.data;
+            localStorage.setItem("familyID", JSON.stringify(familyID));
           })
           .catch((e) => {
             console.log(e);
