@@ -18,7 +18,6 @@ const AddChoreForm = () => {
   const handleFieldChange = (event) => {
     event.preventDefault();
     setFields({ ...fields, [event.target.name]: event.target.value });
-    console.log(fields);
   };
   const handleStatusSelect = (event) => {
     event.preventDefault();

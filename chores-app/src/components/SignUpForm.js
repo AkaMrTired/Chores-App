@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
@@ -16,7 +17,7 @@ const SignUpForm = () => {
   const [fields, setFields] = useState(initialState.fields);
   const [error, setError] = useState();
 
-  const { signUp } = useUserAuth();
+  const { signUp, setFamilyID } = useUserAuth();
   const navigate = useNavigate();
 
   const registration = async (event) => {
@@ -24,6 +25,17 @@ const SignUpForm = () => {
     if (fields.password === fields.confirmPassword) {
       try {
         await signUp(fields.yourEmail, fields.password);
+        await axios
+          .post(`http://localhost:3300/family`, {
+            familyName: fields.familyName,
+          })
+          .then((response) => {
+            setFamilyID(response.data.familyID);
+          })
+          .catch((e) => {
+            console.log(e);
+            event.preventDefault();
+          });
         navigate("/parentdashboard");
       } catch (e) {
         setError(e.message);
@@ -33,25 +45,6 @@ const SignUpForm = () => {
     }
   };
 
-  // const createAccount = (event) => {
-  //  event.preventDefault();
-  //   {
-  //     registration();
-  //     // some axios code to go here to send the field data to the database
-  //     // axios;
-  //     // .post("http://localhost:3300/user", the email & (firebase) uid)
-  //     // .then((response) => {
-  //     //   console.log(response.status);
-  //     // })
-  //     // .catch(() => {
-  //     //   console.log(404);
-  //     // });
-  //     // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
-
-  //     setFields(initialState.fields);
-  //     setSuccess(true);
-  //   }
-  // };
   const handleFieldChange = (event) => {
     event.preventDefault();
     setFields({ ...fields, [event.target.name]: event.target.value });

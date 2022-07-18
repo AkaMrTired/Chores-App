@@ -21,17 +21,20 @@ import ChoresToApprove from "./ChoresToApprove";
 const App = () => {
   const [chores, setChores] = useState([]);
   const { familyID } = useUserAuth();
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:3300/family/${familyID}/chores`)
-      .then((response) => {
-        setChores(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-  // need to watch incase this doesn't call the updated chores from the DB when the parent edits.
+    if (familyID) {
+      axios
+        .get(`http://localhost:3300/family/${familyID}/chores`)
+        .then((response) => {
+          setChores(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [familyID]);
+
   return (
     <div className="App">
       <Nav />
