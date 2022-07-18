@@ -34,7 +34,9 @@ const Login = () => {
         value={fields.password}
         onChange={handleFieldChange}
       />
-      <button type="submit">Log in</button>
+      <button type="submit" className="btn btn-fill_purple">
+        Log in
+      </button>
     </form>
   );
 };

@@ -1,0 +1,22 @@
+form {
+  background: var(--gradient);
+  box-shadow: 0px 0px 20px 1px rgb(59 55 42 / 35%);
+  padding: 3rem 1rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.5em;
+}
+
+input {
+  display: inline-block;
+  margin-bottom: 2rem;
+  background-color: var(--white);
+  border: 1px solid var(--orange-dark);
+  padding: 1rem;
+  border-radius: 15px;
+}

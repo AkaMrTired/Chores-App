@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
+import "../styles/SignUp.css";
 
 const SignUpForm = () => {
   const initialState = {
@@ -53,9 +54,9 @@ const SignUpForm = () => {
       )}
       {!success && (
         <>
-          <h1>Sign Up</h1>
+          <h1>Sign Up!</h1>
           <div>
-            <form onSubmit={createAccount}>
+            <form onSubmit={createAccount} className="sign-up-form">
               <label htmlFor="familyName">Family Name </label>
               <input
                 name="familyName"
@@ -113,7 +114,9 @@ const SignUpForm = () => {
               />
               {!!passwordError && <p>{passwordError}</p>}
 
-              <button type="submit">Create Account</button>
+              <button type="submit" className="btn btn-fill_purple">
+                Create Account
+              </button>
             </form>
           </div>
           <p>

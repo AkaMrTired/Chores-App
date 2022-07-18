@@ -45,7 +45,7 @@ const App = () => {
     <div className="App">
       <Nav />
 
-      <div id="app-container">
+      <div id="app-container" className="app-container">
         <Router>
           <Switch>
             <Route
