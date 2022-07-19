@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import "../styles/AddChoreForm.css";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
+  const familyID = localStorage.getItem("familyID");
   const initialState = {
     fields: {
       name,
@@ -27,18 +29,19 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
   };
 
   const handleSubmit = (event) => {
-    console.log(fields);
-    console.log(`http://localhost:3300/family/:familyID/chores/${choreID}`);
-    // need to add functionality to send fields to the DB
-    //    axios
-    // .patch(`http://localhost:3300/family/${familyID-fromcontext!!}/chores/${choreID}`, fields)
-    // .then((response) => {
-    //   console.log(response.status);
-    // })
-    // .catch(() => {
-    //   console.log(404);
-    // });
     event.preventDefault();
+    axios
+      .patch(
+        `http://localhost:3300/family/${familyID}/chores/${choreID}`,
+        fields
+      )
+      .then((response) => {
+        console.log("success", response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
     setEditing(false);
   };
 

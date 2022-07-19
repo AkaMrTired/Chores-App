@@ -17,7 +17,16 @@ const ListOfChildren = () => {
       .catch((e) => {
         console.log(e);
       });
-    return myChildren.map((child) => <div>{child.name}</div>);
   }, []);
+  return (
+    <div>
+      {myChildren.map((child) => (
+        <div key={child.userID}>{child.name}</div>
+      ))}
+      <button type="button">
+        <a href="/parentdashboard">Back To Dashboard</a>
+      </button>
+    </div>
+  );
 };
 export default ListOfChildren;
