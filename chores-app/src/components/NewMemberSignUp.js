@@ -52,7 +52,11 @@ const NewMemberSignUp = () => {
   //     // .then((response) => {
   //     //   console.log(response.status);
   //     // })
-  //     //.then(navigate("/releventdashboard, populated with user.uid");)
+  //     //.then(if (role === "parent") {
+  //   navigate("/parentdashboard");
+  // } else {
+  //   navigate("/childdashboard");
+  // };)
   //     // .catch(() => {
   //     //   console.log(404);
   //     // });

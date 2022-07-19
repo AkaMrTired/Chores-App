@@ -36,7 +36,6 @@ const SignUpForm = () => {
             const requestBody = {
               email: fields.yourEmail,
               name: fields.yourName,
-              role: "child",
             };
             return axios.post(
               `http://localhost:3300/family/${familyID}/users`,
@@ -44,14 +43,10 @@ const SignUpForm = () => {
             );
           })
           .then((response) => {
+            console.log("responseobject", response.data);
             const [{ userID }] = response.data;
-            console.log(userID);
-            const [{ role }] = response.data;
-            if (role === "parent") {
-              navigate("/parentdashboard");
-            } else {
-              navigate("/childdashboard");
-            }
+            console.log({ userID });
+            navigate("/parentdashboard");
           })
           .catch((e) => {
             console.log(e);
