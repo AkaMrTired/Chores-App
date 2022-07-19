@@ -1,53 +1,68 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
-import emailjs from "@emailjs/browser";
+// import emailjs from "@emailjs/browser";
 import axios from "axios";
 
 const AddNewMemberForm = () => {
   const initialState = {
     fields: {
-      role: "Choose a role",
       email: "",
+      name: "",
+      role: "Choose a role",
     },
   };
   const [fields, setFields] = useState(initialState.fields);
   const [roleError, setRoleError] = useState();
   const [message, setMessage] = useState();
-  const sendEmail = async () => {
-    try {
-      const emailParams = {
-        // DECIDED TO SIMPLIFY -> user will click on the link and we will match to correct account to patch based on email
-        link: `http://localhost:3000/newmembersignup?email=${fields.email}&role=${fields.role}`,
-        email: fields.email,
-      };
-      axios
-        .post("localhost:3300/users", fields)
-        .then((response) => {
-          console.log(response.status);
-        })
-        .catch(() => {
-          console.log(404);
-        });
-      await emailjs.send(
-        process.env.REACT_APP_EMAIL_SERVICE_ID,
-        process.env.REACT_APP_EMAIL_TEMPLATE_ID,
-        emailParams,
-        process.env.REACT_APP_EMAIL_PUBLIC_KEY
-      );
-      setMessage("Invite sent, add another or return to dashboard");
-      setFields(initialState.fields);
-    } catch (error) {
-      setMessage(`uh oh, it looks like there was an error: ${error}`);
-    }
-  };
+  const familyID = localStorage.getItem("familyID");
+  console.log("familyID in add new member", familyID);
 
   const handleSubmit = (event) => {
-    if (fields.role !== "Choose a role") {
-      event.preventDefault();
-      sendEmail();
-    } else {
-      event.preventDefault();
+    event.preventDefault();
+    if (fields.role === "Choose a role") {
       setRoleError("Please select a role for the person you are inviting");
+    } else {
+      try {
+        axios
+          .post(`http://localhost:3300/family/${familyID}/users`, fields)
+          .then(() => {
+            console.log(
+              ` before get http://localhost:3300/family/${familyID}/users`
+            );
+            return axios.get(`http://localhost:3300/family/${familyID}/users`, {
+              email: fields.email,
+              // I don't know why this returns an empty array????
+            });
+          })
+          .then((response) => {
+            console.log(
+              "this is response data after the get request",
+              response
+            );
+          });
+      } catch (error) {
+        setMessage(`uh oh, it looks like there was an error: ${error}`);
+      }
+
+      // const [{ userID }] = response.data;
+      // const emailParams = {
+      //   // DECIDED TO SIMPLIFY -> user will click on the link and we will match to correct account to patch based on email
+      //   link: `http://localhost:3000/newmembersignup?userID=${userID}`,
+      //   email: fields.email,
+      // };
+      // console.log(emailParams);
+      // return emailjs.send(
+      //   process.env.REACT_APP_EMAIL_SERVICE_ID,
+      //   process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+      //   emailParams,
+      //   process.env.REACT_APP_EMAIL_PUBLIC_KEY
+      // );
+      // setMessage("Invite sent, add another or return to dashboard");
+      // setFields(initialState.fields);
+      //     })
+      //     .catch((e) => {
+      //       console.log(".catch, line 48", e);
+      //     });
     }
   };
 
@@ -62,6 +77,15 @@ const AddNewMemberForm = () => {
       <h1>Invite New Member</h1>
       <div>
         <form onSubmit={handleSubmit}>
+          <label htmlFor="name">Name </label>
+          <input
+            name="name"
+            required
+            type="text"
+            placeholder="e.g Danny"
+            value={fields.name}
+            onChange={handleFieldChange}
+          />
           <label htmlFor="role">Role</label>
           <select
             required

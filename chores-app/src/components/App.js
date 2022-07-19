@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import axios from "axios";
-import { useUserAuth } from "../context/UserAuthContext";
+// import { useUserAuth } from "../context/UserAuthContext";
 import Nav from "./Nav";
 import HomePage from "./HomePage";
 import SignUpForm from "./SignUpForm";
@@ -20,10 +20,11 @@ import ChoresToApprove from "./ChoresToApprove";
 
 const App = () => {
   const [chores, setChores] = useState([]);
-  const { familyID } = useUserAuth();
 
   useEffect(() => {
+    const familyID = localStorage.getItem("familyID");
     if (familyID) {
+      console.log({ familyID });
       axios
         .get(`http://localhost:3300/family/${familyID}/chores`)
         .then((response) => {
@@ -32,8 +33,10 @@ const App = () => {
         .catch((e) => {
           console.log(e);
         });
+    } else {
+      console.log({ familyID });
     }
-  }, [familyID]);
+  }, []);
 
   return (
     <div className="App">

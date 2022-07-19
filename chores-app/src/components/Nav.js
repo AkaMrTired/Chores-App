@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Routes, Navigate } from "react-router-dom";
+import { BrowserRouter as Routes } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 
 // eslint-disable-next-line react/prop-types
@@ -8,7 +8,7 @@ const Nav = () => {
   const handleLogOut = async (e) => {
     e.preventDefault();
     await logOut();
-    return <Navigate to="/" />;
+    // setFamilyID();
   };
   return (
     <Routes>
@@ -24,7 +24,7 @@ const Nav = () => {
       </div>
       {user && (
         <button type="button" onClick={handleLogOut}>
-          Sign Out
+          <a href="/">Log out</a>
         </button>
       )}
     </Routes>

@@ -2,10 +2,9 @@
 import React, { useState } from "react";
 import "../styles/AddChoreForm.css";
 import axios from "axios";
-import { useUserAuth } from "../context/UserAuthContext";
 
 const AddChoreForm = () => {
-  const { familyID } = useUserAuth();
+  const familyID = localStorage.getItem("familyID");
   const initialState = {
     fields: {
       name: "",
@@ -41,7 +40,7 @@ const AddChoreForm = () => {
       })
       .catch((e) => {
         console.log(".catch=", e);
-        setSuccessMessage("an error ocurred", e);
+        setSuccessMessage("an error occurred", e);
       });
     setFields(initialState.fields);
   };

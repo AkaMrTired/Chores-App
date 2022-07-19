@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
@@ -20,6 +21,7 @@ const Login = () => {
 
   const [fields, setFields] = useState(initialState.fields);
   const handleLogIn = async (event) => {
+    axios.get("");
     event.preventDefault();
     try {
       await logIn(fields.email, fields.password);
