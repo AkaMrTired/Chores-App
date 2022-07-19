@@ -1,17 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ChoreCard from "./ChoreCard";
+import "../styles/ParentDashboard.css";
 
 const ParentDashboard = ({ chores }) => {
   return (
-    <div className="container">
+    <div className="container parent-dashboard-container">
       <h1>Dashboard</h1>
-      <button type="button">
+      <button type="button" className="btn btn-stroke_purple btn-narrow">
         <a href="/newmember">+ Invite new member</a>
       </button>
-      <div className="container">
-        <h1>Chores</h1>
-        <button type="button">
+      <div className="container parent-dashboard-chores-container">
+        <h2>Chores</h2>
+        <button type="button" className="btn btn-narrow btn-stroke_white">
           <a href="/addchore">Add new chore +</a>
         </button>
         {/* mapping function to go through the chores list and render them. */}
@@ -28,8 +29,8 @@ const ParentDashboard = ({ chores }) => {
         ))}
       </div>
       <div>
-        <button type="button">
-          <a href="/approvechores">Manage chores pending approval</a>
+        <button type="button" className="btn btn-narrow btn-fill_purple">
+          <a href="/approvechores">See pending chores</a>
         </button>
       </div>
     </div>

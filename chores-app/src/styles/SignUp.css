@@ -5,3 +5,7 @@
 .sign-up-form .btn {
   align-self: center;
 }
+
+label {
+  text-align: center;
+}

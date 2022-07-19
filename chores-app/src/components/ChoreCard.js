@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import EditChore from "./EditChore";
+import "../styles/ChoreCard.css";
 // need to add the functionality to these functions; edit button should open an edit view with populated fields based on the chore it was clicked in
 // the delete button will remove the chore from the database, and a nice to have would be a "confirm delete".
 const ChoreCard = ({ name, price, status, component, choreID, owner }) => {
@@ -45,40 +46,50 @@ const ChoreCard = ({ name, price, status, component, choreID, owner }) => {
     );
   }
   return (
-    <div>
-      <div>{name}</div>
-      <div>£{price}</div>
-      {!!status && <div>{status}</div>}
-      {component === "ParentDashboard" && (
-        <button type="button" onClick={editButton}>
-          Edit
-        </button>
-      )}
-      {component === "ParentDashboard" && (
-        <button type="button" onClick={deleteButton}>
-          Delete
-        </button>
-      )}
-      {component === "ChoresToApprove" && (
-        <button type="button" onClick={acceptButton}>
-          Accept
-        </button>
-      )}
-      {component === "ChoresToApprove" && (
-        <button type="button" onClick={rejectButton}>
-          Reject
-        </button>
-      )}
-      {component === "ChildDashboard" && (
-        <button type="button" onClick={doneButton}>
-          Done
-        </button>
-      )}
-      {component === "FindAvailableChores" && (
-        <button type="button" onClick={takeButton}>
-          Take
-        </button>
-      )}
+    <div className="chore-card">
+      <div className="chore-name">{name}</div>
+      <div className="chore-buttons-wrapper">
+        <div className="chore-price">£{price}</div>
+        {!!status && <div>{status}</div>}
+        {component === "ParentDashboard" && (
+          <button
+            type="button"
+            onClick={editButton}
+            className="chore-btn chore-btn_pink"
+          >
+            Edit
+          </button>
+        )}
+        {component === "ParentDashboard" && (
+          <button
+            type="button"
+            onClick={deleteButton}
+            className="chore-btn chore-btn_peach"
+          >
+            Delete
+          </button>
+        )}
+        {component === "ChoresToApprove" && (
+          <button type="button" onClick={acceptButton}>
+            Accept
+          </button>
+        )}
+        {component === "ChoresToApprove" && (
+          <button type="button" onClick={rejectButton}>
+            Reject
+          </button>
+        )}
+        {component === "ChildDashboard" && (
+          <button type="button" onClick={doneButton}>
+            Done
+          </button>
+        )}
+        {component === "FindAvailableChores" && (
+          <button type="button" onClick={takeButton}>
+            Take
+          </button>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,63 @@
+.chore-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 0 0.5rem 2rem;
+  background-color: var(--white);
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+}
+
+.chore-btn {
+  border-radius: 15px;
+  font-family: inherit;
+  padding: 0.5rem 1rem;
+}
+
+.chore-btn:first-of-type {
+  margin: 0 0.5rem 0 1rem;
+}
+
+.chore-btn_pink {
+  background-color: var(--pink);
+  border: 1px solid var(--pink);
+}
+
+.chore-btn_pink:hover {
+  background-color: var(--pink-dark);
+  border: 1px solid var(--pink-dark);
+}
+
+.chore-btn_peach {
+  background-color: var(--peach);
+  border: 1px solid var(--peach);
+}
+
+.chore-btn_peach:hover {
+  background-color: var(--peach-dark);
+  border: 1px solid var(--peach-dark);
+}
+
+.chore-price {
+  background-color: var(--purple-dark);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  line-height: 1.7;
+  margin-right: 1rem;
+}
+
+.chore-name {
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem 0;
+  background-color: var(--purple);
+  border-radius: 15px;
+  margin-bottom: 1rem;
+}
+
+.chore-buttons-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
