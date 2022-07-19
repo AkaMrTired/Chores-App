@@ -6,8 +6,8 @@ import {
   Route,
 } from "react-router-dom";
 import axios from "axios";
-// import { useUserAuth } from "../context/UserAuthContext";
-import Nav from "./Nav";
+import { useUserAuth } from "../context/UserAuthContext";
+import LogOut from "./LogOut";
 import HomePage from "./HomePage";
 import SignUpForm from "./SignUpForm";
 import AddNewMemberForm from "./AddNewMemberForm";
@@ -17,9 +17,11 @@ import AddChoreForm from "./AddChoreForm";
 import ChildDashboard from "./ChildDashboard";
 import FindAvailableChores from "./FindAvailableChores";
 import ChoresToApprove from "./ChoresToApprove";
+import ListOfChildren from "./ListOfChildren";
 
 const App = () => {
   const [chores, setChores] = useState([]);
+  const { user } = useUserAuth();
 
   useEffect(() => {
     const familyID = localStorage.getItem("familyID");
@@ -29,20 +31,21 @@ const App = () => {
         .get(`http://localhost:3300/family/${familyID}/chores`)
         .then((response) => {
           setChores(response.data);
+          console.log(chores);
         })
         .catch((e) => {
           console.log(e);
         });
     } else {
-      console.log({ familyID });
+      console.log("no family ID");
     }
   }, []);
 
   return (
     <div className="App">
-      <Nav />
       <div id="app-container">
         <Router>
+          {user && <LogOut />}
           <Switch>
             <Route
               exact
@@ -59,6 +62,7 @@ const App = () => {
               path="/parentdashboard"
               element={<ParentDashboard chores={chores} />}
             />
+            <Route exact path="/listofchildren" element={<ListOfChildren />} />
 
             <Route exact path="/addchore" element={<AddChoreForm />} />
 

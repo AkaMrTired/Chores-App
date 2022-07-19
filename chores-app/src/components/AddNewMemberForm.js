@@ -18,7 +18,7 @@ const AddNewMemberForm = () => {
   const [message, setMessage] = useState();
   const sendEmail = () => {
     const emailParams = {
-      link: `http://localhost:3000/newmembersignup?name=${fields.name}&email=${fields.email}&role=${fields.role}`,
+      link: `http://localhost:3000/newmembersignup?name=${fields.name}&email=${fields.email}`,
       email: fields.email,
     };
     axios

@@ -1,5 +1,0 @@
-import React from "react";
-
-const FamilyIdContext = React.createContext("dark");
-
-export default FamilyIdContext;

@@ -9,6 +9,9 @@ const ParentDashboard = ({ chores }) => {
       <button type="button">
         <a href="/newmember">+ Invite new member</a>
       </button>
+      <button type="button">
+        <a href="/listofchildren">My Children</a>
+      </button>
       <div className="container">
         <h1>Chores</h1>
         <button type="button">

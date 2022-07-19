@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import axios from "axios";
 import React, { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
@@ -6,14 +7,13 @@ import { useUserAuth } from "../context/UserAuthContext";
 // eslint-disable-next-line react/prop-types
 const NewMemberSignUp = () => {
   const [searchParams] = useSearchParams();
-  const userEmail = searchParams.get("email");
-  const userRole = searchParams.get("role");
+  const name = searchParams.get("name");
+  const email = searchParams.get("email");
 
   const initialState = {
     fields: {
-      email: userEmail,
-      role: userRole,
-      yourName: "",
+      email,
+      name,
       password: "",
       confirmPassword: "",
     },
@@ -24,48 +24,44 @@ const NewMemberSignUp = () => {
   const { signUp } = useUserAuth();
   const navigate = useNavigate();
 
-  const registration = async (event) => {
+  const registration = (event) => {
     event.preventDefault();
     if (fields.password === fields.confirmPassword) {
-      try {
-        await signUp(fields.yourEmail, fields.password);
-        if (userRole === "parent") {
-          navigate("/parentdashboard");
-        } else {
-          navigate("/childdashboard");
-        }
-      } catch (e) {
-        setError(e.message);
-      }
+      signUp(fields.email, fields.password)
+        .then(() => {
+          return axios.get(
+            `http://localhost:3300/family/users/?email=${email}`
+          );
+        })
+        .then((response) => {
+          const [{ userID, role, familyID }] = response.data;
+          localStorage.setItem("userID", JSON.stringify(userID));
+          localStorage.setItem("userRole", JSON.stringify(role));
+          localStorage.setItem("familyID", JSON.stringify(familyID));
+          if (fields.name !== initialState.fields.name) {
+            axios.patch(
+              `http://localhost:3300/family/${familyID}/users/${userID}`,
+              {
+                name: fields.name,
+              }
+            );
+          }
+        })
+        .then(() => {
+          const userRole = localStorage.getItem("userRole");
+          if (userRole === "parent") {
+            navigate("/parentdashboard");
+          } else {
+            navigate("/childdashboard");
+          }
+        })
+        .catch((e) => {
+          setError(e.message);
+        });
     } else {
       setError("Those passwords did not match, please try again");
     }
   };
-
-  // const createAccount = (event) => {
-  //  event.preventDefault();
-  //   {
-  //     registration();
-  //     // some axios code to go here to send the field data to the database
-  //     // axios;
-  //     // .post("http://localhost:3300/user", fields)
-  //     // .then((response) => {
-  //     //   console.log(response.status);
-  //     // })
-  //     //.then(if (role === "parent") {
-  //   navigate("/parentdashboard");
-  // } else {
-  //   navigate("/childdashboard");
-  // };)
-  //     // .catch(() => {
-  //     //   console.log(404);
-  //     // });
-  //     // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
-
-  //     setFields(initialState.fields);
-  //     setSuccess(true);
-  //   }
-  // };
 
   const handleFieldChange = (event) => {
     event.preventDefault();
@@ -81,13 +77,13 @@ const NewMemberSignUp = () => {
       </p>
       <div>
         <form onSubmit={registration}>
-          <label htmlFor="yourName">Your Name </label>
+          <label htmlFor="name">Your Name </label>
           <input
-            name="yourName"
+            name="name"
             required
             type="text"
-            placeholder="e.g Mommy"
-            value={fields.yourName}
+            placeholder={fields.name}
+            value={fields.name}
             onChange={handleFieldChange}
           />
 

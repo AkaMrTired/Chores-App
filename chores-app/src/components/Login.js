@@ -8,9 +8,6 @@ const Login = () => {
   const { logIn } = useUserAuth();
   const navigate = useNavigate();
 
-  const userRole = "parent";
-  // should come from context in the future!!!
-
   const initialState = {
     fields: {
       email: "",
@@ -20,21 +17,33 @@ const Login = () => {
   // const userRole = "parent"; // to check on functionality - should come from context
 
   const [fields, setFields] = useState(initialState.fields);
-  const handleLogIn = async (event) => {
+  const handleLogIn = (event) => {
     axios.get("");
     event.preventDefault();
-    try {
-      await logIn(fields.email, fields.password);
-      if (userRole === "parent") {
-        navigate("/parentdashboard");
-      } else {
-        navigate("/childdashboard");
-      }
-      // needs to axios.get and set context for the app.
-      // console.log(success);
-    } catch (error) {
-      console.log(error.message);
-    }
+    logIn(fields.email, fields.password)
+      .then(() => {
+        return axios.get(
+          `http://localhost:3300/family/users/?email=${fields.email}`
+        );
+      })
+      .then((response) => {
+        console.log(response.data);
+        const [{ userID, role, familyID }] = response.data;
+        localStorage.setItem("userID", JSON.stringify(userID));
+        localStorage.setItem("userRole", JSON.stringify(role));
+        localStorage.setItem("familyID", JSON.stringify(familyID));
+
+        if (role === "parent") {
+          navigate("/parentdashboard");
+        } else {
+          navigate("/childdashboard");
+        }
+        // needs to axios.get and set context for the app.
+        // console.log(success);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   const handleFieldChange = (event) => {
