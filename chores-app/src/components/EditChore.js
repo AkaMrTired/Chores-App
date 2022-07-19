@@ -1,10 +1,22 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import "../styles/AddChoreForm.css";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
+import { useUserAuth } from "../context/UserAuthContext";
+
+const EditChore = ({
+  setEditing,
+  name,
+  price,
+  status,
+  choreID,
+  owner,
+  // eslint-disable-next-line react/prop-types
+}) => {
+  const { setChores } = useUserAuth();
   const familyID = localStorage.getItem("familyID");
   const initialState = {
     fields: {
@@ -37,12 +49,15 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
       )
       .then((response) => {
         console.log("success", response);
+        setEditing(false);
+        return axios.get(`http://localhost:3300/family/${familyID}/chores`);
+      })
+      .then((response) => {
+        setChores(response.data);
       })
       .catch((e) => {
         console.log(e);
       });
-
-    setEditing(false);
   };
 
   return (

@@ -1,8 +1,30 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+// import PropTypes from "prop-types";
+import axios from "axios";
 import ChoreCard from "./ChoreCard";
 
-const ParentDashboard = ({ chores }) => {
+import { useUserAuth } from "../context/UserAuthContext";
+
+// eslint-disable-next-line react/prop-types
+const ParentDashboard = () => {
+  const { chores, setChores } = useUserAuth();
+  useEffect(() => {
+    const familyID = localStorage.getItem("familyID");
+    if (familyID) {
+      console.log({ familyID });
+      axios
+        .get(`http://localhost:3300/family/${familyID}/chores`)
+        .then((response) => {
+          setChores(response.data);
+          console.log(chores);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      console.log("no family ID");
+    }
+  }, []);
   return (
     <div className="container">
       <h1>Dashboard</h1>
@@ -41,15 +63,15 @@ const ParentDashboard = ({ chores }) => {
 
 // we will need to edit the prop validation when we know what the data looks like.
 
-ParentDashboard.propTypes = {
-  chores: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.number,
-      name: PropTypes.string,
-      price: PropTypes.number,
-      status: PropTypes.string,
-      owner: PropTypes.number,
-    })
-  ).isRequired,
-};
+// ParentDashboard.propTypes = {
+//   chores: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       _id: PropTypes.number,
+//       name: PropTypes.string,
+//       price: PropTypes.number,
+//       status: PropTypes.string,
+//       owner: PropTypes.number,
+//     })
+//   ).isRequired,
+// };
 export default ParentDashboard;

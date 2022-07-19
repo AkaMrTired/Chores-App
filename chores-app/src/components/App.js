@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../styles/App.css";
 import {
   BrowserRouter as Router,
   Routes as Switch,
   Route,
 } from "react-router-dom";
-import axios from "axios";
 import { useUserAuth } from "../context/UserAuthContext";
 import LogOut from "./LogOut";
 import HomePage from "./HomePage";
@@ -20,26 +19,7 @@ import ChoresToApprove from "./ChoresToApprove";
 import ListOfChildren from "./ListOfChildren";
 
 const App = () => {
-  const [chores, setChores] = useState([]);
-  const { user } = useUserAuth();
-
-  useEffect(() => {
-    const familyID = localStorage.getItem("familyID");
-    if (familyID) {
-      console.log({ familyID });
-      axios
-        .get(`http://localhost:3300/family/${familyID}/chores`)
-        .then((response) => {
-          setChores(response.data);
-          console.log(chores);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    } else {
-      console.log("no family ID");
-    }
-  }, []);
+  const { user, chores } = useUserAuth();
 
   return (
     <div className="App">
@@ -60,7 +40,7 @@ const App = () => {
             <Route
               exact
               path="/parentdashboard"
-              element={<ParentDashboard chores={chores} />}
+              element={<ParentDashboard key={chores} />}
             />
             <Route exact path="/listofchildren" element={<ListOfChildren />} />
 
@@ -75,19 +55,19 @@ const App = () => {
             <Route
               exact
               path="/childdashboard"
-              element={<ChildDashboard chores={chores} />}
+              element={<ChildDashboard key={chores} chores={chores} />}
             />
 
             <Route
               exact
               path="/findchore"
-              element={<FindAvailableChores chores={chores} />}
+              element={<FindAvailableChores key={chores} chores={chores} />}
             />
 
             <Route
               exact
               path="/approvechores"
-              element={<ChoresToApprove chores={chores} />}
+              element={<ChoresToApprove key={chores} chores={chores} />}
             />
           </Switch>
         </Router>

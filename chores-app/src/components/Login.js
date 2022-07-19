@@ -14,7 +14,6 @@ const Login = () => {
       password: "",
     },
   };
-  // const userRole = "parent"; // to check on functionality - should come from context
 
   const [fields, setFields] = useState(initialState.fields);
   const handleLogIn = (event) => {
@@ -27,7 +26,6 @@ const Login = () => {
         );
       })
       .then((response) => {
-        console.log(response.data);
         const [{ userID, role, familyID }] = response.data;
         localStorage.setItem("userID", JSON.stringify(userID));
         localStorage.setItem("userRole", JSON.stringify(role));
@@ -38,8 +36,6 @@ const Login = () => {
         } else {
           navigate("/childdashboard");
         }
-        // needs to axios.get and set context for the app.
-        // console.log(success);
       })
       .catch((error) => {
         console.log(error.message);
