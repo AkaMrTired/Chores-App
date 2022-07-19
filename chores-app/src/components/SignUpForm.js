@@ -31,7 +31,6 @@ const SignUpForm = () => {
           })
           .then((response) => {
             const { familyID } = response.data;
-            console.log("line34", familyID);
             localStorage.setItem("familyID", JSON.stringify(familyID));
             const requestBody = {
               email: fields.yourEmail,
@@ -43,9 +42,9 @@ const SignUpForm = () => {
             );
           })
           .then((response) => {
-            console.log("responseobject", response.data);
             const [{ userID }] = response.data;
-            console.log({ userID });
+            localStorage.setItem("userID", JSON.stringify(userID));
+            localStorage.setItem("userRole", JSON.stringify("parent"));
             navigate("/parentdashboard");
           })
           .catch((e) => {
