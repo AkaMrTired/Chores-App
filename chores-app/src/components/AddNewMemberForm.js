@@ -99,13 +99,15 @@ const AddNewMemberForm = () => {
             value={fields.email}
             onChange={handleFieldChange}
           />
+          <button type="submit" className="btn btn-fill_purple">
+            Send Invite!
+          </button>
 
-          <button type="submit">Send Invite!</button>
           {!!message && <p>{message}</p>}
         </form>
       </div>
-      <div>
-        <button type="button">
+      <div className="back-btn-wrapper">
+        <button type="button" className="btn btn-stroke_purple">
           <a href="/parentdashboard">Back To Dashboard</a>
         </button>
       </div>

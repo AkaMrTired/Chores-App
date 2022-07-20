@@ -6,7 +6,6 @@ import {
   Route,
 } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
-import LogOut from "./LogOut";
 import HomePage from "./HomePage";
 import SignUpForm from "./SignUpForm";
 import AddNewMemberForm from "./AddNewMemberForm";
@@ -17,15 +16,16 @@ import ChildDashboard from "./ChildDashboard";
 import FindAvailableChores from "./FindAvailableChores";
 import ChoresToApprove from "./ChoresToApprove";
 import ListOfChildren from "./ListOfChildren";
+import Nav from "./Nav";
 
 const App = () => {
-  const { user, chores } = useUserAuth();
+  const { chores } = useUserAuth();
 
   return (
     <div className="App">
-      <div id="app-container">
+      <div id="app-container" className="app-container">
         <Router>
-          {user && <LogOut />}
+          <Nav />
           <Switch>
             <Route
               exact
@@ -68,7 +68,7 @@ const App = () => {
             <Route
               exact
               path="/approvechores"
-              element={<ChoresToApprove key={chores} chores={chores} />}
+              element={<ChoresToApprove key={chores} />}
             />
           </Switch>
         </Router>

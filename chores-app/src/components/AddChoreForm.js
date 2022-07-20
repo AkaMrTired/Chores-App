@@ -49,7 +49,7 @@ const AddChoreForm = () => {
     <div>
       <h1>Add a chore</h1>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="add-chore-form">
           <label htmlFor="name">Chore name</label>
           <input
             type="text"
@@ -69,33 +69,44 @@ const AddChoreForm = () => {
             onChange={handleFieldChange}
           />
           <p>Select if your chore will be available or unavailable to begin</p>
+          <div className="add-chore-btn-wrapper">
+            <button
+              type="button"
+              className={
+                fields.status === "A"
+                  ? "selected btn btn-stroke_white"
+                  : "btn btn-stroke_white"
+              }
+              name="available"
+              value="A"
+              onClick={handleStatusSelect}
+            >
+              Available
+            </button>
 
-          <button
-            type="button"
-            className={fields.status === "A" ? "selected" : ""}
-            name="available"
-            value="A"
-            onClick={handleStatusSelect}
-          >
-            Available
+            <button
+              type="button"
+              name="Unavailable"
+              className={
+                fields.status === "U"
+                  ? "selected btn btn-stroke_white"
+                  : "btn btn-stroke_white"
+              }
+              value="U"
+              onClick={handleStatusSelect}
+            >
+              Unavailable
+            </button>
+          </div>
+
+          <button type="submit" className="btn btn-fill_purple">
+            Save chore
           </button>
-
-          <button
-            type="button"
-            name="Unavailable"
-            className={fields.status === "U" ? "selected" : ""}
-            value="U"
-            onClick={handleStatusSelect}
-          >
-            Unavailable
-          </button>
-
-          <button type="submit">Save chore</button>
         </form>
       </div>
       <div>{successMessage && successMessage}</div>
-      <div>
-        <button type="button">
+      <div className="back-btn-wrapper">
+        <button type="button" className="btn btn-stroke_purple">
           <a href="/parentdashboard">Back To Dashboard</a>
         </button>
       </div>

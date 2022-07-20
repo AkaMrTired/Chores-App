@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import EditChore from "./EditChore";
+import "../styles/ChoreCard.css";
 
 import { useUserAuth } from "../context/UserAuthContext";
 
@@ -118,40 +119,50 @@ const ChoreCard = ({ name, price, status, component, choreID, choreOwner }) => {
     );
   }
   return (
-    <div>
-      <div>{name}</div>
-      <div>£{price}</div>
-      {!!status && <div>{status}</div>}
-      {component === "ParentDashboard" && (
-        <button type="button" onClick={editButton}>
-          Edit
-        </button>
-      )}
-      {component === "ParentDashboard" && (
-        <button type="button" onClick={deleteButton}>
-          Delete
-        </button>
-      )}
-      {component === "ChoresToApprove" && (
-        <button type="button" onClick={acceptButton}>
-          Accept
-        </button>
-      )}
-      {component === "ChoresToApprove" && (
-        <button type="button" onClick={rejectButton}>
-          Reject
-        </button>
-      )}
-      {component === "ChildDashboard" && (
-        <button type="button" onClick={doneButton}>
-          Done
-        </button>
-      )}
-      {component === "FindAvailableChores" && (
-        <button type="button" onClick={takeButton}>
-          Take
-        </button>
-      )}
+    <div className="chore-card">
+      <div className="chore-name">{name}</div>
+      <div className="chore-buttons-wrapper">
+        <div className="chore-price">£{price}</div>
+        {!!status && <div>{status}</div>}
+        {component === "ParentDashboard" && (
+          <button
+            type="button"
+            onClick={editButton}
+            className="chore-btn chore-btn_pink"
+          >
+            Edit
+          </button>
+        )}
+        {component === "ParentDashboard" && (
+          <button
+            type="button"
+            onClick={deleteButton}
+            className="chore-btn chore-btn_peach"
+          >
+            Delete
+          </button>
+        )}
+        {component === "ChoresToApprove" && (
+          <button type="button" onClick={acceptButton}>
+            Accept
+          </button>
+        )}
+        {component === "ChoresToApprove" && (
+          <button type="button" onClick={rejectButton}>
+            Reject
+          </button>
+        )}
+        {component === "ChildDashboard" && (
+          <button type="button" onClick={doneButton}>
+            Done
+          </button>
+        )}
+        {component === "FindAvailableChores" && (
+          <button type="button" onClick={takeButton}>
+            Take
+          </button>
+        )}
+      </div>
     </div>
   );
 };

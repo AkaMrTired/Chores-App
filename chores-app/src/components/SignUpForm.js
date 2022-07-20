@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
+import "../styles/SignUp.css";
 
 const SignUpForm = () => {
   const initialState = {
@@ -68,7 +69,7 @@ const SignUpForm = () => {
     <div className="sign-up-container">
       <h1>Sign Up</h1>
       <div>
-        <form onSubmit={registration}>
+        <form onSubmit={registration} className="sign-up-form">
           <label htmlFor="familyName">Family Name </label>
           <input
             name="familyName"
@@ -125,7 +126,9 @@ const SignUpForm = () => {
           />
           {!!error && <p>{error}</p>}
 
-          <button type="submit">Create Account</button>
+          <button type="submit" className="btn btn-fill_purple">
+            Create Account
+          </button>
         </form>
       </div>
       <p>
