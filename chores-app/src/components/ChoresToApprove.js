@@ -1,16 +1,38 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import axios from "axios";
 import ChoreCard from "./ChoreCard";
+import { useUserAuth } from "../context/UserAuthContext";
 
-const ChoresToApprove = ({ chores }) => {
+const ChoresToApprove = () => {
+  const { chores, setChores } = useUserAuth();
+  useEffect(() => {
+    const familyID = localStorage.getItem("familyID");
+    if (familyID) {
+      console.log({ familyID });
+      axios
+        .get(`http://localhost:3300/family/${familyID}/chores`)
+        .then((response) => {
+          setChores(response.data);
+          console.log(chores);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      console.log("no family ID");
+    }
+  }, []);
   return (
     <div className="container">
       <h2>These are the completed chores for you to approve</h2>
-      <p>
+      <span>
         When you accept a chore is done, the child will get the reward in their
-        account
-      </p>
-      <p>If you click reject, it will be added back onto their todo list</p>
+        account.
+      </span>
+      <br />
+      <span>
+        If you click reject, it will be added back onto their todo list
+      </span>
 
       {/* mapping function to go through the chores list and render the pending chores, it would be nice to add who is doing the chore in the future */}
       {chores
@@ -20,6 +42,8 @@ const ChoresToApprove = ({ chores }) => {
             key={chore._id}
             name={chore.name}
             price={chore.price}
+            choreOwner={chore.owner}
+            choreID={chore.choreID}
             component="ChoresToApprove"
           />
         ))}
@@ -30,18 +54,5 @@ const ChoresToApprove = ({ chores }) => {
       </div>
     </div>
   );
-};
-
-// we will need to edit the prop validation when we know what the data looks like.
-
-ChoresToApprove.propTypes = {
-  chores: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.number,
-      name: PropTypes.string,
-      price: PropTypes.number,
-      status: PropTypes.string,
-    })
-  ).isRequired,
 };
 export default ChoresToApprove;

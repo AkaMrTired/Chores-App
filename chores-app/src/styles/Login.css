@@ -1,0 +1,24 @@
+form {
+  background: var(--gradient);
+  box-shadow: var(--shadow);
+  padding: 3rem 1rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.5em;
+}
+
+input,
+select {
+  display: inline-block;
+  margin-bottom: 2rem;
+  background-color: var(--white);
+  border: 1px solid var(--orange-dark);
+  padding: 1rem;
+  border-radius: 15px;
+}

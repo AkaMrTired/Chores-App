@@ -1,4 +1,24 @@
+.add-chore-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+}
 .selected {
-    background-color:rgb(123, 151, 195);
-    border: 2px solid
-  }
+  background-color: var(--pink);
+  border: 2px solid var(--pink);
+  color: var(--purple-dark);
+}
+
+.selected:hover {
+  background-color: var(--pink-dark);
+  border-color: var(--pink-dark);
+}
+
+.add-chore-btn-wrapper .btn {
+  margin-bottom: 1rem;
+}
+
+.add-chore-form .btn-fill_purple {
+  margin-bottom: 0;
+  margin-top: 2rem;
+  display: inline-block;
+}

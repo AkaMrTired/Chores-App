@@ -1,52 +1,61 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import axios from "axios";
 import ChoreCard from "./ChoreCard";
+import "../styles/ParentDashboard.css";
 
-const ParentDashboard = ({ chores }) => {
+import { useUserAuth } from "../context/UserAuthContext";
+
+// eslint-disable-next-line react/prop-types
+const ParentDashboard = () => {
+  const { chores, setChores } = useUserAuth();
+  useEffect(() => {
+    const familyID = localStorage.getItem("familyID");
+    if (familyID) {
+      axios
+        .get(`http://localhost:3300/family/${familyID}/chores`)
+        .then((response) => {
+          setChores(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      console.log("no family ID");
+    }
+  }, []);
   return (
-    <div className="container">
+    <div className="container parent-dashboard-container">
       <h1>Dashboard</h1>
-      <button type="button">
+      <button type="button" className="btn btn-stroke_purple btn-narrow">
         <a href="/newmember">+ Invite new member</a>
       </button>
-      <div className="container">
-        <h1>Chores</h1>
-        <button type="button">
+      <button type="button">
+        <a href="/listofchildren">My Children</a>
+      </button>
+      <div className="container parent-dashboard-chores-container">
+        <h2>Chores</h2>
+        <button type="button" className="btn btn-narrow btn-stroke_white">
           <a href="/addchore">Add new chore +</a>
+        </button>
+        <button type="button" className="btn btn-narrow btn-fill_purple">
+          <a href="/approvechores">View complete chores pending approval</a>
         </button>
         {/* mapping function to go through the chores list and render them. */}
         {chores.map((chore) => (
           <ChoreCard
-            key={chore._id}
+            key={chore.choreID}
             name={chore.name}
             price={chore.price}
             status={chore.status}
             choreID={chore.choreID}
-            owner={chore.owner}
+            choreOwner={chore.owner}
             component="ParentDashboard"
           />
         ))}
       </div>
-      <div>
-        <button type="button">
-          <a href="/approvechores">Manage chores pending approval</a>
-        </button>
-      </div>
+      <div />
     </div>
   );
 };
 
-// we will need to edit the prop validation when we know what the data looks like.
-
-ParentDashboard.propTypes = {
-  chores: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.number,
-      name: PropTypes.string,
-      price: PropTypes.number,
-      status: PropTypes.string,
-      owner: PropTypes.number,
-    })
-  ).isRequired,
-};
 export default ParentDashboard;

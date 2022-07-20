@@ -1,9 +1,15 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import "../styles/AddChoreForm.css";
 import PropTypes from "prop-types";
+import axios from "axios";
+
+import { useUserAuth } from "../context/UserAuthContext";
 
 const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
+  const { setChores } = useUserAuth();
+  const familyID = localStorage.getItem("familyID");
   const initialState = {
     fields: {
       name,
@@ -20,6 +26,7 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
   const handleStatusSelect = (event) => {
     event.preventDefault();
     setFields({ ...fields, status: event.target.value, owner: null });
+    console.log(fields);
   };
   const cancelEdit = (event) => {
     event.preventDefault();
@@ -27,19 +34,23 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
   };
 
   const handleSubmit = (event) => {
-    console.log(fields);
-    console.log(`http://localhost:3300/family/:familyID/chores/${choreID}`);
-    // need to add functionality to send fields to the DB
-    //    axios
-    // .patch(`http://localhost:3300/family/${familyID-fromcontext!!}/chores/${choreID}`, fields)
-    // .then((response) => {
-    //   console.log(response.status);
-    // })
-    // .catch(() => {
-    //   console.log(404);
-    // });
     event.preventDefault();
-    setEditing(false);
+    axios
+      .patch(
+        `http://localhost:3300/family/${familyID}/chores/${choreID}`,
+        fields
+      )
+      .then((response) => {
+        console.log("success", response);
+        setEditing(false);
+        return axios.get(`http://localhost:3300/family/${familyID}/chores`);
+      })
+      .then((response) => {
+        setChores(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -66,7 +77,7 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
             onChange={handleFieldChange}
           />
           <span>Status of the chore </span>
-          <span>note: you can not select taken if it is not already</span>
+          <span>note: you change the status to taken or pending approval</span>
 
           <button
             type="button"
@@ -101,7 +112,6 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
             className={fields.status === "P" ? "selected" : ""}
             name="Pending Approval"
             value="P"
-            onClick={handleStatusSelect}
           >
             Pending approval
           </button>

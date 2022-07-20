@@ -1,5 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../context/UserAuthContext";
+import "../styles/SignUp.css";
 
 const SignUpForm = () => {
   const initialState = {
@@ -12,28 +16,50 @@ const SignUpForm = () => {
     },
   };
   const [fields, setFields] = useState(initialState.fields);
-  const [passwordError, setPasswordError] = useState();
-  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState();
 
-  const createAccount = (event) => {
+  const { signUp } = useUserAuth();
+  const navigate = useNavigate();
+
+  const registration = async (event) => {
+    event.preventDefault();
     if (fields.password === fields.confirmPassword) {
-      // some axios code to go here to send the field data to the database
-      // axios;
-      // .post("http://localhost:3300/user", fields)
-      // .then((response) => {
-      //   console.log(response.status);
-      // })
-      // .catch(() => {
-      //   console.log(404);
-      // });
-      // currently the fields will reset but we can change this so we  change the page to be the parent's home page once this is
-      setFields(initialState.fields);
-      setSuccess(true);
+      try {
+        await signUp(fields.yourEmail, fields.password);
+        axios
+          .post(`http://localhost:3300/family`, {
+            familyName: fields.familyName,
+          })
+          .then((response) => {
+            const { familyID } = response.data;
+            localStorage.setItem("familyID", JSON.stringify(familyID));
+            const requestBody = {
+              email: fields.yourEmail,
+              name: fields.yourName,
+            };
+            return axios.post(
+              `http://localhost:3300/family/${familyID}/users`,
+              requestBody
+            );
+          })
+          .then((response) => {
+            const [{ userID }] = response.data;
+            localStorage.setItem("userID", JSON.stringify(userID));
+            localStorage.setItem("userRole", JSON.stringify("parent"));
+            navigate("/parentdashboard");
+          })
+          .catch((e) => {
+            console.log(e);
+            event.preventDefault();
+          });
+      } catch (e) {
+        setError(e.message);
+      }
     } else {
-      event.preventDefault();
-      setPasswordError("Those passwords did not match, please try again");
+      setError("Those passwords did not match, please try again");
     }
   };
+
   const handleFieldChange = (event) => {
     event.preventDefault();
     setFields({ ...fields, [event.target.name]: event.target.value });
@@ -41,87 +67,74 @@ const SignUpForm = () => {
 
   return (
     <div className="sign-up-container">
-      {success && (
-        <>
-          <h1>Success</h1>
-          <div>
-            <button type="button">
-              <a href="/">click here to sign into your new account</a>
-            </button>
-          </div>
-        </>
-      )}
-      {!success && (
-        <>
-          <h1>Sign Up</h1>
-          <div>
-            <form onSubmit={createAccount}>
-              <label htmlFor="familyName">Family Name </label>
-              <input
-                name="familyName"
-                required
-                type="text"
-                placeholder="e.g. The Cool Gang"
-                value={fields.familyName}
-                onChange={handleFieldChange}
-              />
+      <h1>Sign Up</h1>
+      <div>
+        <form onSubmit={registration} className="sign-up-form">
+          <label htmlFor="familyName">Family Name </label>
+          <input
+            name="familyName"
+            required
+            type="text"
+            placeholder="e.g. The Cool Gang"
+            value={fields.familyName}
+            onChange={handleFieldChange}
+          />
 
-              <label htmlFor="yourName">Your Name </label>
-              <input
-                name="yourName"
-                required
-                type="text"
-                placeholder="e.g Mommy"
-                value={fields.yourName}
-                onChange={handleFieldChange}
-              />
+          <label htmlFor="yourName">Your Name </label>
+          <input
+            name="yourName"
+            required
+            type="text"
+            placeholder="e.g Mommy"
+            value={fields.yourName}
+            onChange={handleFieldChange}
+          />
 
-              <label htmlFor="yourEmail">Your Email</label>
-              <input
-                type="email"
-                name="yourEmail"
-                required
-                placeholder="e.g example@example.com"
-                value={fields.email}
-                onChange={handleFieldChange}
-              />
+          <label htmlFor="yourEmail">Your Email</label>
+          <input
+            type="email"
+            name="yourEmail"
+            required
+            placeholder="e.g example@example.com"
+            value={fields.email}
+            onChange={handleFieldChange}
+          />
 
-              <label htmlFor="password">
-                Password (minimum 5 characters, must contain a letter and a
-                number)
-              </label>
-              <input
-                type="password"
-                name="password"
-                data-testid="password"
-                required
-                placeholder="*******"
-                minLength="5"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
-                value={fields.password}
-                onChange={handleFieldChange}
-              />
+          <label htmlFor="password">
+            Password (minimum 6 characters, must contain a letter and a number)
+          </label>
+          <input
+            type="password"
+            name="password"
+            data-testid="password"
+            required
+            placeholder="*******"
+            minLength="6"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$"
+            value={fields.password}
+            onChange={handleFieldChange}
+          />
 
-              <label htmlFor="confirmPassword">Confirm Password </label>
-              <input
-                type="password"
-                name="confirmPassword"
-                required
-                placeholder="*******"
-                value={fields.confirmPassword}
-                onChange={handleFieldChange}
-              />
-              {!!passwordError && <p>{passwordError}</p>}
+          <label htmlFor="confirmPassword">Confirm Password </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            required
+            placeholder="*******"
+            value={fields.confirmPassword}
+            onChange={handleFieldChange}
+          />
+          {!!error && <p>{error}</p>}
 
-              <button type="submit">Create Account</button>
-            </form>
-          </div>
-          <p>
-            You will be able to invite more family members once you make your
-            account.
-          </p>
-        </>
-      )}
+          <button type="submit" className="btn btn-fill_purple">
+            Create Account
+          </button>
+        </form>
+      </div>
+      <p>
+        You will be able to invite more family members once you make your
+        account.
+      </p>
     </div>
   );
 };

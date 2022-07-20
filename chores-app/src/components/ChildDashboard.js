@@ -1,12 +1,30 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import ChoreCard from "./ChoreCard";
+import { useUserAuth } from "../context/UserAuthContext";
 
-const ChildDashboard = ({ chores }) => {
-  // need to add the functionality to these functions
+const ChildDashboard = () => {
+  const { chores, setChores } = useUserAuth();
+  const userID = localStorage.getItem("userID");
+  console.log({ userID });
+  useEffect(() => {
+    const familyID = localStorage.getItem("familyID");
+    if (familyID) {
+      axios
+        .get(`http://localhost:3300/family/${familyID}/chores`)
+        .then((response) => {
+          setChores(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      console.log("no family ID");
+    }
+  }, []);
   const [requestedAmount, setRequestedAmount] = useState();
   const handleRequest = () => {
-    // handle request function should the requested amount to the DB and reset the input field so it is blank again.
+    // handle request function should POST the requested amount to the DB and reset the input field so it is blank again.
   };
   const handleFieldChange = (event) => {
     event.preventDefault();
@@ -17,21 +35,23 @@ const ChildDashboard = ({ chores }) => {
   return (
     <div className="container">
       <h1>Dashboard</h1>
+      <h2>
+        Balance £0
+        {
+          // FUTURE DEVELOPMENT: to get this from the DB.
+        }
+      </h2>
+
       <form onSubmit={handleRequest}>
         <label htmlFor="requestedamount">
-          £
+          Cash in your hard work - £
           <input
             type="number"
             name="requestedamount"
             onChange={handleFieldChange}
           />
         </label>
-        <button
-          type="submit"
-          // onSubmit = POST request to update the DB
-        >
-          Request Amount
-        </button>
+        <button type="submit">Request Amount</button>
       </form>
 
       <div className="container">
@@ -39,30 +59,22 @@ const ChildDashboard = ({ chores }) => {
         <button type="button">
           <a href="/findchore">Find a new chore!</a>
         </button>
-        {/* mapping function to go through the chores list and render them where the user is assigned to the chore e.g. chore.owner===userId */}
-        {chores.map((chore) => (
-          <ChoreCard
-            key={chore._id}
-            name={chore.name}
-            price={chore.price}
-            component="ChildDashboard"
-          />
-        ))}
+        {chores
+          // eslint-disable-next-line eqeqeq
+          .filter((chore) => chore.owner == userID && chore.status == "T")
+          .map((chore) => (
+            <ChoreCard
+              key={chore.choreID}
+              name={chore.name}
+              price={chore.price}
+              choreID={chore.choreID}
+              choreOwner={chore.owner}
+              component="ChildDashboard"
+            />
+          ))}
       </div>
     </div>
   );
 };
 
-// we will need to edit the prop validation when we know what the data looks like.
-
-ChildDashboard.propTypes = {
-  chores: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.number,
-      name: PropTypes.string,
-      price: PropTypes.number,
-      status: PropTypes.string,
-    })
-  ).isRequired,
-};
 export default ChildDashboard;

@@ -4,41 +4,46 @@ import emailjs from "@emailjs/browser";
 import axios from "axios";
 
 const AddNewMemberForm = () => {
+  const familyID = localStorage.getItem("familyID");
+
   const initialState = {
     fields: {
-      role: "Choose a role",
       email: "",
+      name: "",
+      role: "Choose a role",
     },
   };
   const [fields, setFields] = useState(initialState.fields);
   const [roleError, setRoleError] = useState();
   const [message, setMessage] = useState();
-  const sendEmail = async () => {
-    try {
-      const emailParams = {
-        // DECIDED TO SIMPLIFY -> user will click on the link and we will match to correct account to patch based on email
-        link: `http://localhost:3000/newmembersignup?email=${fields.email}`,
+  const sendEmail = () => {
+    const initialLink = `http://localhost:3000/newmembersignup?name=${fields.name}&email=${fields.email}`;
+    const noSpacesLink = initialLink.replace(/\s+/g, "");
+    const emailParams = {
+      link: noSpacesLink,
+      email: fields.email,
+    };
+    axios
+      .post(`http://localhost:3300/family/${familyID}/users`, {
+        name: fields.name,
+        role: fields.role,
         email: fields.email,
-      };
-      axios
-        .post("localhost:3300/users", fields)
-        .then((response) => {
-          console.log(response.status);
-        })
-        .catch(() => {
-          console.log(404);
-        });
-      await emailjs.send(
-        process.env.REACT_APP_EMAIL_SERVICE_ID,
-        process.env.REACT_APP_EMAIL_TEMPLATE_ID,
-        emailParams,
-        process.env.REACT_APP_EMAIL_PUBLIC_KEY
-      );
-      setMessage("Invite sent, add another or return to dashboard");
-      setFields(initialState.fields);
-    } catch (error) {
-      setMessage(`uh oh, it looks like there was an error: ${error}`);
-    }
+      })
+      .then(() => {
+        return emailjs.send(
+          process.env.REACT_APP_EMAIL_SERVICE_ID,
+          process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+          emailParams,
+          process.env.REACT_APP_EMAIL_PUBLIC_KEY
+        );
+      })
+      .then(() => {
+        setMessage("Invite sent, add another or return to dashboard");
+        setFields(initialState.fields);
+      })
+      .catch(() => {
+        setMessage(`uh oh, it looks like there was an error`);
+      });
   };
 
   const handleSubmit = (event) => {
@@ -52,6 +57,7 @@ const AddNewMemberForm = () => {
   };
 
   const handleFieldChange = (event) => {
+    setMessage();
     event.preventDefault();
     setFields({ ...fields, [event.target.name]: event.target.value });
     setRoleError();
@@ -62,6 +68,15 @@ const AddNewMemberForm = () => {
       <h1>Invite New Member</h1>
       <div>
         <form onSubmit={handleSubmit}>
+          <label htmlFor="name">Name </label>
+          <input
+            name="name"
+            required
+            type="text"
+            placeholder="e.g Timmy"
+            value={fields.name}
+            onChange={handleFieldChange}
+          />
           <label htmlFor="role">Role</label>
           <select
             required
@@ -84,13 +99,15 @@ const AddNewMemberForm = () => {
             value={fields.email}
             onChange={handleFieldChange}
           />
+          <button type="submit" className="btn btn-fill_purple">
+            Send Invite!
+          </button>
 
-          <button type="submit">Send Invite!</button>
           {!!message && <p>{message}</p>}
         </form>
       </div>
-      <div>
-        <button type="button">
+      <div className="back-btn-wrapper">
+        <button type="button" className="btn btn-stroke_purple">
           <a href="/parentdashboard">Back To Dashboard</a>
         </button>
       </div>
