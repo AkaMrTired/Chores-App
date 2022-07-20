@@ -87,7 +87,7 @@ const NewMemberSignUp = () => {
           />
 
           <label htmlFor="password">
-            Password (minimum 5 characters, must contain a letter and a number)
+            Password (minimum 6 characters, must contain a letter and a number)
           </label>
           <input
             type="password"
