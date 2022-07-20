@@ -11,6 +11,18 @@ exports[`the new member form matches the snapshot 1`] = `
     <div>
       <form>
         <label
+          for="name"
+        >
+          Name 
+        </label>
+        <input
+          name="name"
+          placeholder="e.g Timmy"
+          required=""
+          type="text"
+          value=""
+        />
+        <label
           for="role"
         >
           Role
@@ -48,14 +60,18 @@ exports[`the new member form matches the snapshot 1`] = `
           value=""
         />
         <button
+          class="btn btn-fill_purple"
           type="submit"
         >
           Send Invite!
         </button>
       </form>
     </div>
-    <div>
+    <div
+      class="back-btn-wrapper"
+    >
       <button
+        class="btn btn-stroke_purple"
         type="button"
       >
         <a

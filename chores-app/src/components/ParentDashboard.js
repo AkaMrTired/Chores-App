@@ -37,6 +37,9 @@ const ParentDashboard = () => {
         <button type="button" className="btn btn-narrow btn-stroke_white">
           <a href="/addchore">Add new chore +</a>
         </button>
+        <button type="button" className="btn btn-narrow btn-fill_purple">
+          <a href="/approvechores">View complete chores pending approval</a>
+        </button>
         {/* mapping function to go through the chores list and render them. */}
         {chores.map((chore) => (
           <ChoreCard
@@ -50,11 +53,7 @@ const ParentDashboard = () => {
           />
         ))}
       </div>
-      <div>
-        <button type="button" className="btn btn-narrow btn-fill_purple">
-          <a href="/approvechores">See pending chores</a>
-        </button>
-      </div>
+      <div />
     </div>
   );
 };
