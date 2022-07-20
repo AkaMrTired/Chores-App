@@ -1,4 +1,4 @@
-# Bish Bash Bosh
+# Bish Bash Dosh
 This app is designed to help a family get their chores done and keep the peace while they are at it. A parent is able to create an account and invite co parents and children to join. Chores can be added and assigned a monetary value. They will appear for all children when they are in the 'Available' state and the first to take the chore and mark it 'done' will be submitting a request to the parent to approve the chore completion so the money can be added to their account.
 This is the repository for the front end of the application, the back-end can be found here: https://github.com/coramarcu/chores-app-back-end.
 
@@ -14,7 +14,7 @@ For full functionality, an emailjs account and a firebase account will also be n
 To make http requests, axios is used.
 
 ## Project setup
-To set up this project for yourself, you will need to git clone git@github.com:AkaMrTired/Chores-App.git 
+To set up this project for yourself, you will need to "git clone git@github.com:AkaMrTired/Chores-App.git"
 Install the relevant dependencies with npm install.
 Ensure you have an emailjs account and firebase account; set up the .env with the detail below.
 To link it with the back-end, you should following instructions on https://github.com/coramarcu/chores-app-back-end.
