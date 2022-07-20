@@ -68,6 +68,7 @@ const ChildDashboard = () => {
               name={chore.name}
               price={chore.price}
               choreID={chore.choreID}
+              choreOwner={chore.owner}
               component="ChildDashboard"
             />
           ))}

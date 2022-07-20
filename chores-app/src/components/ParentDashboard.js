@@ -44,7 +44,7 @@ const ParentDashboard = () => {
             price={chore.price}
             status={chore.status}
             choreID={chore.choreID}
-            owner={chore.owner}
+            choreOwner={chore.owner}
             component="ParentDashboard"
           />
         ))}

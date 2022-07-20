@@ -41,6 +41,7 @@ const ChoresToApprove = () => {
             key={chore._id}
             name={chore.name}
             price={chore.price}
+            choreOwner={chore.owner}
             choreID={chore.choreID}
             component="ChoresToApprove"
           />

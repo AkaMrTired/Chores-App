@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable react/prop-types */
 // not all props required all the time
 import React, { useState } from "react";
@@ -7,7 +8,7 @@ import EditChore from "./EditChore";
 
 import { useUserAuth } from "../context/UserAuthContext";
 
-const ChoreCard = ({ name, price, status, component, choreID, owner }) => {
+const ChoreCard = ({ name, price, status, component, choreID, choreOwner }) => {
   const [editing, setEditing] = useState(false);
   const { setChores } = useUserAuth();
   const familyID = localStorage.getItem("familyID");
@@ -57,6 +58,7 @@ const ChoreCard = ({ name, price, status, component, choreID, owner }) => {
     axios
       .patch(`http://localhost:3300/family/${familyID}/chores/${choreID}`, {
         status: "T",
+        owner: choreOwner,
       })
       .then(() => {
         return axios.get(`http://localhost:3300/family/${familyID}/chores`);
@@ -73,7 +75,7 @@ const ChoreCard = ({ name, price, status, component, choreID, owner }) => {
     axios
       .patch(`http://localhost:3300/family/${familyID}/chores/${choreID}`, {
         status: "P",
-        owner: userID,
+        owner: choreOwner,
       })
       .then(() => {
         return axios.get(`http://localhost:3300/family/${familyID}/chores`);
@@ -111,7 +113,7 @@ const ChoreCard = ({ name, price, status, component, choreID, owner }) => {
         status={status}
         setEditing={setEditing}
         choreID={choreID}
-        owner={owner}
+        owner={choreOwner}
       />
     );
   }

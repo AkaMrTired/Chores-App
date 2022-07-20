@@ -26,6 +26,7 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
   const handleStatusSelect = (event) => {
     event.preventDefault();
     setFields({ ...fields, status: event.target.value, owner: null });
+    console.log(fields);
   };
   const cancelEdit = (event) => {
     event.preventDefault();
