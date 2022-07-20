@@ -17,8 +17,10 @@ const AddNewMemberForm = () => {
   const [roleError, setRoleError] = useState();
   const [message, setMessage] = useState();
   const sendEmail = () => {
+    const initialLink = `http://localhost:3000/newmembersignup?name=${fields.name}&email=${fields.email}&role=${fields.role}`;
+    const noSpacesLink = initialLink.replace(/\s+/g, "");
     const emailParams = {
-      link: `http://localhost:3000/newmembersignup?name=${fields.name}&email=${fields.email}`,
+      link: noSpacesLink,
       email: fields.email,
     };
     axios

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 
-// eslint-disable-next-line react/prop-types
 const NewMemberSignUp = () => {
   const [searchParams] = useSearchParams();
   const name = searchParams.get("name");
@@ -49,7 +48,7 @@ const NewMemberSignUp = () => {
         })
         .then(() => {
           const userRole = localStorage.getItem("userRole");
-          if (userRole === "parent") {
+          if (userRole === '"parent"') {
             navigate("/parentdashboard");
           } else {
             navigate("/childdashboard");

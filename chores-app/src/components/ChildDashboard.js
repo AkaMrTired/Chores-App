@@ -9,7 +9,6 @@ const ChildDashboard = () => {
   useEffect(() => {
     const familyID = localStorage.getItem("familyID");
     if (familyID) {
-      console.log({ familyID });
       axios
         .get(`http://localhost:3300/family/${familyID}/chores`)
         .then((response) => {

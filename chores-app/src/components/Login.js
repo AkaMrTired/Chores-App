@@ -30,7 +30,15 @@ const Login = () => {
         localStorage.setItem("userID", JSON.stringify(userID));
         localStorage.setItem("userRole", JSON.stringify(role));
         localStorage.setItem("familyID", JSON.stringify(familyID));
-
+        const storedfamilyID = localStorage.getItem("familyID");
+        const storeduserID = localStorage.getItem("userID");
+        const storeduserRole = localStorage.getItem("userRole");
+        console.log(
+          "local storage to confirm login stored data:",
+          { storedfamilyID },
+          { storeduserID },
+          { storeduserRole }
+        );
         if (role === "parent") {
           navigate("/parentdashboard");
         } else {

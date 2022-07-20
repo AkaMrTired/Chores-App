@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import PropTypes from "prop-types";
 import axios from "axios";
 import ChoreCard from "./ChoreCard";
 
@@ -11,12 +10,10 @@ const ParentDashboard = () => {
   useEffect(() => {
     const familyID = localStorage.getItem("familyID");
     if (familyID) {
-      console.log({ familyID });
       axios
         .get(`http://localhost:3300/family/${familyID}/chores`)
         .then((response) => {
           setChores(response.data);
-          console.log(chores);
         })
         .catch((e) => {
           console.log(e);
@@ -61,17 +58,4 @@ const ParentDashboard = () => {
   );
 };
 
-// we will need to edit the prop validation when we know what the data looks like.
-
-// ParentDashboard.propTypes = {
-//   chores: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       _id: PropTypes.number,
-//       name: PropTypes.string,
-//       price: PropTypes.number,
-//       status: PropTypes.string,
-//       owner: PropTypes.number,
-//     })
-//   ).isRequired,
-// };
 export default ParentDashboard;
