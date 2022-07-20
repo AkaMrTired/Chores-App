@@ -27,8 +27,9 @@ const ChoresToApprove = () => {
       <h2>These are the completed chores for you to approve</h2>
       <span>
         When you accept a chore is done, the child will get the reward in their
-        account
+        account.
       </span>
+      <br />
       <span>
         If you click reject, it will be added back onto their todo list
       </span>
