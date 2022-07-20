@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# Bish Bash Bosh
+This app is designed to help a family get their chores done and keep the peace while they are at it. A parent is able to create an account and invite co parents and children to join. Chores can be added and assigned a monetary value. They will appear for all children when they are in the 'Available' state and the first to take the chore and mark it 'done' will be submitting a request to the parent to approve the chore completion so the money can be added to their account.
+This is the repository for the front end of the application, the back-end can be found here: https://github.com/coramarcu/chores-app-back-end.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Future Development
+The future of this app would see the API and front-end deployed to make them widely available. 
+Related to this their would be some security adjustments; hashing of email addresses, hosting of an email address, creation of a firebase account with "localhost" unselected.
+The functionality of the app would be expanded to allow the children's balances to be updates with every approved chores, and to allow the children to submit requests to cash in some of their balance IRL. 
+A component would be added for the parents to give the parents an overview of each child's profile, which would be linked within 'ListOfChilren.js'.
 
-## Available Scripts
+## Technologies
+This project is bootstrapped with React-create-app. 
+For full functionality, an emailjs account and a firebase account will also be needed, with the settings saved in .env as below.
+To make http requests, axios is used.
 
-In the project directory, you can run:
+## Project setup
+To set up this project for yourself, you will need to git clone git@github.com:AkaMrTired/Chores-App.git 
+Install the relevant dependencies with npm install.
+Ensure you have an emailjs account and firebase account; set up the .env with the detail below.
+To link it with the back-end, you should following instructions on https://github.com/coramarcu/chores-app-back-end.
+npm start should start up the app and render it in your browser.
 
-### `npm start`
+## .env
+The following keys are contained in the .env; the email details are provided by an emailjs account, and the firebase details are provided by a firebase account:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+REACT_APP_EMAIL_SERVICE_ID=
+REACT_APP_EMAIL_TEMPLATE_ID=
+REACT_APP_EMAIL_PUBLIC_KEY=
+REACT_APP_FIREBASE_API_KEY=
+REACT_APP_FIREBASE_AUTH_DOMAIN=
+REACT_APP_FIREBASE_PROJECT_ID=
+REACT_APP_FIREBASE_STORAGE_BUCKET=
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
+REACT_APP_FIREBASE_APP_ID=
