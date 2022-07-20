@@ -31,7 +31,7 @@ const App = () => {
               exact
               path="/"
               element={<HomePage />}
-              // within the login (rendered in the homepage) the user email/password will be verified and axios request made; with the result body, setUserDetails will be used to set the userID and familyID
+              // future development - ensure user is redirected to homepage unless they are logged in (!user=>"/" https://v5.reactrouter.com/web/example/auth-workflow)
             />
 
             <Route exact path="/signup" element={<SignUpForm />} />
@@ -55,13 +55,14 @@ const App = () => {
             <Route
               exact
               path="/childdashboard"
-              element={<ChildDashboard key={chores} chores={chores} />}
+              element={<ChildDashboard key={chores} />}
+              // the key prop means the component will re-render when the chores array is updated
             />
 
             <Route
               exact
               path="/findchore"
-              element={<FindAvailableChores key={chores} chores={chores} />}
+              element={<FindAvailableChores key={chores} />}
             />
 
             <Route

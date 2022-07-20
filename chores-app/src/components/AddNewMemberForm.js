@@ -23,9 +23,9 @@ const AddNewMemberForm = () => {
     };
     axios
       .post(`http://localhost:3300/family/${familyID}/users`, {
-        name: "Timmy",
-        role: "child",
-        email: "test@test",
+        name: fields.name,
+        role: fields.role,
+        email: fields.email,
       })
       .then(() => {
         return emailjs.send(

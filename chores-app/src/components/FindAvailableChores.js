@@ -1,8 +1,27 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+import axios from "axios";
 import ChoreCard from "./ChoreCard";
+import { useUserAuth } from "../context/UserAuthContext";
 
-const FindAvailableChores = ({ chores }) => {
+const FindAvailableChores = () => {
+  const { chores, setChores } = useUserAuth();
+  useEffect(() => {
+    const familyID = localStorage.getItem("familyID");
+    if (familyID) {
+      console.log({ familyID });
+      axios
+        .get(`http://localhost:3300/family/${familyID}/chores`)
+        .then((response) => {
+          setChores(response.data);
+          console.log(chores);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      console.log("no family ID");
+    }
+  }, []);
   return (
     <div className="container">
       <h3>These chores are available!</h3>
@@ -26,16 +45,4 @@ const FindAvailableChores = ({ chores }) => {
   );
 };
 
-// we will need to edit the prop validation when we know what the data looks like.
-
-FindAvailableChores.propTypes = {
-  chores: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.number,
-      name: PropTypes.string,
-      price: PropTypes.number,
-      status: PropTypes.string,
-    })
-  ).isRequired,
-};
 export default FindAvailableChores;

@@ -7,15 +7,7 @@ import axios from "axios";
 
 import { useUserAuth } from "../context/UserAuthContext";
 
-const EditChore = ({
-  setEditing,
-  name,
-  price,
-  status,
-  choreID,
-  owner,
-  // eslint-disable-next-line react/prop-types
-}) => {
+const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
   const { setChores } = useUserAuth();
   const familyID = localStorage.getItem("familyID");
   const initialState = {
@@ -84,7 +76,7 @@ const EditChore = ({
             onChange={handleFieldChange}
           />
           <span>Status of the chore </span>
-          <span>note: you can not select taken if it is not already</span>
+          <span>note: you change the status to taken or pending approval</span>
 
           <button
             type="button"
@@ -119,7 +111,6 @@ const EditChore = ({
             className={fields.status === "P" ? "selected" : ""}
             name="Pending Approval"
             value="P"
-            onClick={handleStatusSelect}
           >
             Pending approval
           </button>

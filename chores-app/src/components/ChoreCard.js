@@ -1,26 +1,38 @@
 /* eslint-disable react/prop-types */
 // not all props required all the time
 import React, { useState } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 import EditChore from "./EditChore";
-// need to add the functionality to these functions; edit button should open an edit view with populated fields based on the chore it was clicked in
-// the delete button will remove the chore from the database, and a nice to have would be a "confirm delete".
-const ChoreCard = ({
-  name,
-  price,
-  status,
-  component,
-  choreID,
-  owner,
-  setRerender,
-}) => {
+
+import { useUserAuth } from "../context/UserAuthContext";
+
+const ChoreCard = ({ name, price, status, component, choreID, owner }) => {
   const [editing, setEditing] = useState(false);
+  const { setChores } = useUserAuth();
+  const familyID = localStorage.getItem("familyID");
+  const userID = localStorage.getItem("userID");
+
   const editButton = (event) => {
     event.preventDefault();
     setEditing(true);
   };
 
-  const deleteButton = () => {};
+  const deleteButton = (event) => {
+    event.preventDefault();
+    axios
+      .delete(`http://localhost:3300/family/${familyID}/chores/${choreID}`)
+      .then((response) => {
+        console.log("success", response);
+        return axios.get(`http://localhost:3300/family/${familyID}/chores`);
+      })
+      .then((response) => {
+        setChores(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   const acceptButton = () => {
     // Accept:
@@ -36,8 +48,25 @@ const ChoreCard = ({
   const doneButton = () => {
     // done button should change the status and owner of the chore in the DB
   };
-  const takeButton = () => {
+  const takeButton = (event) => {
     // this will assign the user ID to the chore.owner & update the chore.status to T
+
+    event.preventDefault();
+    axios
+      .patch(`http://localhost:3300/family/${familyID}/chores/${choreID}`, {
+        status: "T",
+        owner: userID,
+      })
+      .then((response) => {
+        console.log("success", response);
+        return axios.get(`http://localhost:3300/family/${familyID}/chores`);
+      })
+      .then((response) => {
+        setChores(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   if (editing) {
@@ -48,7 +77,6 @@ const ChoreCard = ({
         status={status}
         setEditing={setEditing}
         choreID={choreID}
-        setRerender={setRerender}
         owner={owner}
       />
     );
