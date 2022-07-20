@@ -1,0 +1,16 @@
+.approve-chores-container {
+    max-width: var(--mobile-width);
+    margin: 2rem auto;
+    background: var(--gradient);
+    padding: 2rem;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.approve-chores-container span {
+    margin-bottom: 1rem;
+}
+.approve-chores-container span:last-of-type {
+    margin-bottom: 2rem;
+}

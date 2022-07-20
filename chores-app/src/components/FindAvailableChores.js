@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import ChoreCard from "./ChoreCard";
 import { useUserAuth } from "../context/UserAuthContext";
+import "../styles/FindAvailableChores.css";
 
 const FindAvailableChores = () => {
   const { chores, setChores } = useUserAuth();
@@ -23,9 +24,8 @@ const FindAvailableChores = () => {
     }
   }, []);
   return (
-    <div className="container">
-      <h3>These chores are available!</h3>
-      {/* mapping function to go through the chores list and render them where. */}
+    <div className="container find-chore-container">
+      <h1>These chores are available!</h1>
       {chores
         .filter((chore) => chore.status === "A")
         .map((chore) => (
@@ -39,7 +39,7 @@ const FindAvailableChores = () => {
           />
         ))}
       <div>
-        <button type="button">
+        <button type="button" className="btn btn-narrow btn-stroke_white">
           <a href="/childdashboard">Back To Dashboard</a>
         </button>
       </div>

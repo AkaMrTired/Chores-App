@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import axios from "axios";
+import "../styles/AddNewMemberForm.css";
 
 const AddNewMemberForm = () => {
   const familyID = localStorage.getItem("familyID");
@@ -64,7 +65,7 @@ const AddNewMemberForm = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <div className="invite-member-container">
       <h1>Invite New Member</h1>
       <div>
         <form onSubmit={handleSubmit}>

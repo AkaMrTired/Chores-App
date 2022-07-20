@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
-import "../styles/AddChoreForm.css";
+import "../styles/EditChore.css";
 import PropTypes from "prop-types";
 import axios from "axios";
 
@@ -55,9 +55,9 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
 
   return (
     <div>
-      <h1>Add a chore</h1>
+      <h1>Edit chore</h1>
       <div>
-        <form onSubmit={handleSubmit}>
+        <form className="edit-chore-container" onSubmit={handleSubmit}>
           <label htmlFor="name">Chore name</label>
           <input
             type="text"
@@ -81,7 +81,11 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
 
           <button
             type="button"
-            className={fields.status === "A" ? "selected" : ""}
+            className={
+              fields.status === "A"
+                ? "selected btn btn-fill_purple"
+                : "btn btn-fill_purple"
+            }
             name="available"
             value="A"
             onClick={handleStatusSelect}
@@ -92,7 +96,11 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
           <button
             type="button"
             name="Unavailable"
-            className={fields.status === "U" ? "selected" : ""}
+            className={
+              fields.status === "U"
+                ? "selected btn btn-fill_purple"
+                : "btn btn-fill_purple"
+            }
             value="U"
             onClick={handleStatusSelect}
           >
@@ -101,7 +109,11 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
 
           <button
             type="button"
-            className={fields.status === "T" ? "selected" : ""}
+            className={
+              fields.status === "T"
+                ? "selected btn btn-fill_purple"
+                : "btn btn-fill_purple"
+            }
             name="Taken"
             value="T"
           >
@@ -109,15 +121,25 @@ const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
           </button>
           <button
             type="button"
-            className={fields.status === "P" ? "selected" : ""}
+            className={
+              fields.status === "P"
+                ? "selected btn btn-fill_purple"
+                : "btn btn-fill_purple"
+            }
             name="Pending Approval"
             value="P"
           >
             Pending approval
           </button>
           <div>
-            <button type="submit">Save chore</button>
-            <button type="button" onClick={cancelEdit}>
+            <button className="btn btn-narrow btn-stroke_white" type="submit">
+              Save chore
+            </button>
+            <button
+              className="btn btn-narrow btn-stroke_white"
+              type="button"
+              onClick={cancelEdit}
+            >
               Cancel
             </button>
           </div>

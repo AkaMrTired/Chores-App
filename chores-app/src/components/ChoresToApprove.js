@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import ChoreCard from "./ChoreCard";
 import { useUserAuth } from "../context/UserAuthContext";
+import "../styles/ChoresToApprove.css";
 
 const ChoresToApprove = () => {
   const { chores, setChores } = useUserAuth();
@@ -23,13 +24,12 @@ const ChoresToApprove = () => {
     }
   }, []);
   return (
-    <div className="container">
+    <div className="container approve-chores-container">
       <h2>These are the completed chores for you to approve</h2>
       <span>
         When you accept a chore is done, the child will get the reward in their
         account.
       </span>
-      <br />
       <span>
         If you click reject, it will be added back onto their todo list
       </span>
@@ -48,7 +48,7 @@ const ChoresToApprove = () => {
           />
         ))}
       <div>
-        <button type="button">
+        <button type="button" className="btn btn-narrow btn-stroke_purple">
           <a href="/parentdashboard">Back To Dashboard</a>
         </button>
       </div>

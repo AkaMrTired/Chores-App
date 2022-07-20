@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ChoreCard from "./ChoreCard";
 import { useUserAuth } from "../context/UserAuthContext";
+import "../styles/ChildDashboard.css";
 
 const ChildDashboard = () => {
   const { chores, setChores } = useUserAuth();
@@ -33,7 +34,7 @@ const ChildDashboard = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container child-dashboard-container">
       <h1>Dashboard</h1>
       <h2>
         Balance £0
@@ -51,12 +52,14 @@ const ChildDashboard = () => {
             onChange={handleFieldChange}
           />
         </label>
-        <button type="submit">Request Amount</button>
+        <button type="submit" className="btn btn-fill_purple">
+          Request Amount
+        </button>
       </form>
 
-      <div className="container">
+      <div className="container my-chores-container">
         <h1>My Chores</h1>
-        <button type="button">
+        <button type="button" className="btn btn-narrow btn-stroke_purple">
           <a href="/findchore">Find a new chore!</a>
         </button>
         {chores

@@ -16,7 +16,11 @@ const LogOut = () => {
     navigate("/");
   };
   return (
-    <button type="button" onClick={handleLogOut}>
+    <button
+      className="btn btn-narrow btn-stroke_purple"
+      type="button"
+      onClick={handleLogOut}
+    >
       Log out
     </button>
   );

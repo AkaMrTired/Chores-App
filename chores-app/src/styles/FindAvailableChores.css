@@ -1,0 +1,10 @@
+.find-chore-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--gradient);
+    max-width: var(--mobile-width);
+    margin: 2rem auto;
+    border-radius: 25px;
+    padding: 2rem;
+}

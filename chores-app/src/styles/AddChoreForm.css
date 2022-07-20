@@ -1,3 +1,18 @@
+.add-chore-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: var(--mobile-width);
+}
+.add-chore-form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.add-chore-form-wrapper p {
+  width: 70%;
+}
 .add-chore-btn-wrapper {
   display: flex;
   flex-direction: column;
@@ -7,16 +22,13 @@
   border: 2px solid var(--pink);
   color: var(--purple-dark);
 }
-
 .selected:hover {
   background-color: var(--pink-dark);
   border-color: var(--pink-dark);
 }
-
 .add-chore-btn-wrapper .btn {
   margin-bottom: 1rem;
 }
-
 .add-chore-form .btn-fill_purple {
   margin-bottom: 0;
   margin-top: 2rem;

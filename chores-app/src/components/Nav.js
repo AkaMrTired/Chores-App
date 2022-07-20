@@ -26,8 +26,8 @@ const Nav = () => {
     <div className="nav-container">
       <div id="nav-bar" className="nav-bar">
         <div className="logo-container">
-          <button type="button" onClick={navigateHome}>
-            <img src={logo} alt="app logo" className="logo" />
+          <button type="button" className="logo-btn" onClick={navigateHome}>
+            <img src={logo} alt="app logo" className="logo-img" />
           </button>
         </div>
         <div className="nav-links-container active">{user && <LogOut />}</div>
