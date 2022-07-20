@@ -1,0 +1,15 @@
+.edit-chore-container .btn {
+margin-bottom: 1rem;
+}
+.edit-chore-container .btn:first-of-type {
+    margin-top: 1rem;
+    }
+    
+.edit-chore-container .btn-narrow:first-of-type {
+    margin-right: 1rem;
+}
+
+.edit-chore-container {
+    background: none !important;
+    box-shadow: none;
+}

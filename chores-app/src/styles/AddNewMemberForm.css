@@ -1,0 +1,8 @@
+.invite-member-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: var(--mobile-width);
+    margin: 0 auto;
+    padding: 2rem;
+}

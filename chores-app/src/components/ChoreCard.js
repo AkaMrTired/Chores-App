@@ -143,22 +143,38 @@ const ChoreCard = ({ name, price, status, component, choreID, choreOwner }) => {
           </button>
         )}
         {component === "ChoresToApprove" && (
-          <button type="button" onClick={acceptButton}>
+          <button
+            type="button"
+            onClick={acceptButton}
+            className="chore-btn chore-btn_peach"
+          >
             Accept
           </button>
         )}
         {component === "ChoresToApprove" && (
-          <button type="button" onClick={rejectButton}>
+          <button
+            type="button"
+            onClick={rejectButton}
+            className="chore-btn chore-btn_pink"
+          >
             Reject
           </button>
         )}
         {component === "ChildDashboard" && (
-          <button type="button" onClick={doneButton}>
+          <button
+            type="button"
+            onClick={doneButton}
+            className="chore-btn chore-btn_peach"
+          >
             Done
           </button>
         )}
         {component === "FindAvailableChores" && (
-          <button type="button" onClick={takeButton}>
+          <button
+            type="button"
+            onClick={takeButton}
+            className="chore-btn chore-btn_peach"
+          >
             Take
           </button>
         )}

@@ -46,9 +46,9 @@ const AddChoreForm = () => {
   };
 
   return (
-    <div>
+    <div className="add-chore-container">
       <h1>Add a chore</h1>
-      <div>
+      <div className="add-chore-form-wrapper">
         <form onSubmit={handleSubmit} className="add-chore-form">
           <label htmlFor="name">Chore name</label>
           <input

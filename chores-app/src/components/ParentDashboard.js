@@ -29,7 +29,7 @@ const ParentDashboard = () => {
       <button type="button" className="btn btn-stroke_purple btn-narrow">
         <a href="/newmember">+ Invite new member</a>
       </button>
-      <button type="button">
+      <button type="button" className="btn btn-fill_pink">
         <a href="/listofchildren">My Children</a>
       </button>
       <div className="container parent-dashboard-chores-container">
