@@ -6,6 +6,7 @@ import { useUserAuth } from "../context/UserAuthContext";
 const ChildDashboard = () => {
   const { chores, setChores } = useUserAuth();
   const userID = localStorage.getItem("userID");
+  console.log({ userID });
   useEffect(() => {
     const familyID = localStorage.getItem("familyID");
     if (familyID) {
@@ -13,7 +14,6 @@ const ChildDashboard = () => {
         .get(`http://localhost:3300/family/${familyID}/chores`)
         .then((response) => {
           setChores(response.data);
-          console.log("chore in child dash", chores);
         })
         .catch((e) => {
           console.log(e);
@@ -36,15 +36,15 @@ const ChildDashboard = () => {
     <div className="container">
       <h1>Dashboard</h1>
       <h2>
-        Balance £
+        Balance £0
         {
-          // user.balance
+          // FUTURE DEVELOPMENT: to get this from the DB.
         }
       </h2>
 
       <form onSubmit={handleRequest}>
         <label htmlFor="requestedamount">
-          £
+          Cash in your hard work - £
           <input
             type="number"
             name="requestedamount"
@@ -60,7 +60,8 @@ const ChildDashboard = () => {
           <a href="/findchore">Find a new chore!</a>
         </button>
         {chores
-          .filter((chore) => chore.owner === userID)
+          // eslint-disable-next-line eqeqeq
+          .filter((chore) => chore.owner == userID && chore.status == "T")
           .map((chore) => (
             <ChoreCard
               key={chore.choreID}

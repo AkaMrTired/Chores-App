@@ -33,6 +33,7 @@ const FindAvailableChores = () => {
             key={chore._id}
             name={chore.name}
             price={chore.price}
+            choreID={chore.choreID}
             component="FindAvailableChores"
           />
         ))}

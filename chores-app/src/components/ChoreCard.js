@@ -22,8 +22,7 @@ const ChoreCard = ({ name, price, status, component, choreID, owner }) => {
     event.preventDefault();
     axios
       .delete(`http://localhost:3300/family/${familyID}/chores/${choreID}`)
-      .then((response) => {
-        console.log("success", response);
+      .then(() => {
         return axios.get(`http://localhost:3300/family/${familyID}/chores`);
       })
       .then((response) => {
@@ -34,31 +33,66 @@ const ChoreCard = ({ name, price, status, component, choreID, owner }) => {
       });
   };
 
-  const acceptButton = () => {
-    // Accept:
-    // -> chore status goes to Unavailable
-    // -> chore.owner resets to null
+  const acceptButton = (event) => {
+    event.preventDefault();
+    axios
+      .patch(`http://localhost:3300/family/${familyID}/chores/${choreID}`, {
+        status: "U",
+        owner: null,
+      })
+      .then(() => {
+        return axios.get(`http://localhost:3300/family/${familyID}/chores`);
+      })
+      .then((response) => {
+        setChores(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    // FUTURE DEVELOPMENT:
     // -> money goes into child's balance
   };
-  const rejectButton = () => {
-    // Reject:
-    // -> chore status changes to Taken (which stops it rendering here)
-    // -> chore.owner stays as the childID
+  const rejectButton = (event) => {
+    event.preventDefault();
+    axios
+      .patch(`http://localhost:3300/family/${familyID}/chores/${choreID}`, {
+        status: "T",
+      })
+      .then(() => {
+        return axios.get(`http://localhost:3300/family/${familyID}/chores`);
+      })
+      .then((response) => {
+        setChores(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
-  const doneButton = () => {
-    // done button should change the status and owner of the chore in the DB
+  const doneButton = (event) => {
+    event.preventDefault();
+    axios
+      .patch(`http://localhost:3300/family/${familyID}/chores/${choreID}`, {
+        status: "P",
+        owner: userID,
+      })
+      .then(() => {
+        return axios.get(`http://localhost:3300/family/${familyID}/chores`);
+      })
+      .then((response) => {
+        setChores(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   const takeButton = (event) => {
-    // this will assign the user ID to the chore.owner & update the chore.status to T
-
     event.preventDefault();
     axios
       .patch(`http://localhost:3300/family/${familyID}/chores/${choreID}`, {
         status: "T",
         owner: userID,
       })
-      .then((response) => {
-        console.log("success", response);
+      .then(() => {
         return axios.get(`http://localhost:3300/family/${familyID}/chores`);
       })
       .then((response) => {
