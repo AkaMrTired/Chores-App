@@ -1,16 +1,39 @@
 .edit-chore-container .btn {
-margin-bottom: 1rem;
+margin: 1rem;
+width: 500px
 }
-.edit-chore-container .btn:first-of-type {
-    margin-top: 1rem;
-    }
-    
-.edit-chore-container .btn-narrow:first-of-type {
-    margin-right: 1rem;
+
+input,
+select {
+  display: inline-block;
+  margin-bottom: 2rem;
+  border: 1px solid var(--purple);
+  padding: 1rem;
+  border-radius: 15px;
+}
+.edit-titles {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 0;
+    background-color: var(--purple);
+    border-radius: 15px;
+    margin-bottom: 1rem;
 }
 
 .edit-chore-container {
-    background: none !important;
-    box-shadow: none;
-    margin: 5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 0 0.5rem 2rem;
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    align-self: center;
+    width: 100%;
+    max-width: 500px;
+}
+.complete-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

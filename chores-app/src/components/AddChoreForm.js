@@ -46,70 +46,64 @@ const AddChoreForm = ({ familyID }) => {
   };
 
   return (
-    <div className="add-chore-container">
-      <h1>Add a chore</h1>
-      <div className="add-chore-form-wrapper">
-        <form onSubmit={handleSubmit} className="add-chore-form">
-          <label htmlFor="name">Chore name</label>
-          <input
-            type="text"
-            name="name"
-            required
-            placeholder="e.g. hoover the lounge"
-            value={fields.name}
-            onChange={handleFieldChange}
-          />
-          <label htmlFor="price">Chore price in pounds</label>
-          <input
-            type="text"
-            name="price"
-            required
-            placeholder="e.g. 5"
-            value={fields.price}
-            onChange={handleFieldChange}
-          />
-          <p>Select if your chore will be available or unavailable to begin</p>
-          <div className="add-chore-btn-wrapper">
-            <button
-              type="button"
-              className={
-                fields.status === "A"
-                  ? "selected btn btn-stroke_white"
-                  : "btn btn-stroke_white"
-              }
-              name="available"
-              value="A"
-              onClick={handleStatusSelect}
-            >
-              Available
-            </button>
-
-            <button
-              type="button"
-              name="Unavailable"
-              className={
-                fields.status === "U"
-                  ? "selected btn btn-stroke_white"
-                  : "btn btn-stroke_white"
-              }
-              value="U"
-              onClick={handleStatusSelect}
-            >
-              Unavailable
-            </button>
-          </div>
-
-          <button type="submit" className="btn btn-fill_purple">
+    <div>
+      <form onSubmit={handleSubmit} className="add-chore-container">
+        <h1>Add a chore</h1>
+        <label htmlFor="name">Chore name</label>
+        <input
+          type="text"
+          name="name"
+          required
+          placeholder="e.g. hoover the lounge"
+          value={fields.name}
+          onChange={handleFieldChange}
+        />
+        <label htmlFor="price">Chore price in pounds</label>
+        <input
+          type="text"
+          name="price"
+          required
+          placeholder="e.g. 5"
+          value={fields.price}
+          onChange={handleFieldChange}
+        />
+        <p>Select if your chore will be available or unavailable to begin</p>
+        <button
+          type="button"
+          className={
+            fields.status === "A"
+              ? "selected btn btn-fill_pink"
+              : "btn btn-fill_purple"
+          }
+          name="available"
+          value="A"
+          onClick={handleStatusSelect}
+        >
+          Available
+        </button>
+        <button
+          type="button"
+          name="Unavailable"
+          className={
+            fields.status === "U"
+              ? "selected btn btn-fill_pink"
+              : "btn btn-fill_purple"
+          }
+          value="U"
+          onClick={handleStatusSelect}
+        >
+          Unavailable
+        </button>
+        <div className="add-chore-btn-wrapper">
+          <button type="button" className="btn chore-btn btn-stroke_purple">
+            <a href="/parentdashboard">Back To Dashboard</a>
+          </button>
+          <button className="btn chore-btn chore-btn_peach" type="submit">
             Save chore
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
       <div>{successMessage && successMessage}</div>
-      <div className="back-btn-wrapper">
-        <button type="button" className="btn btn-stroke_purple">
-          <a href="/parentdashboard">Back To Dashboard</a>
-        </button>
-      </div>
     </div>
   );
 };

@@ -1,38 +1,39 @@
 .add-chore-container {
-  padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  width: 90vw;
-  max-width: 1000px;
-  margin: 5rem;
+  padding: 1rem;
+  margin: 0 0.5rem 2rem;
+  background: var(--gradient);
+  box-shadow: var(--shadow);
+  border-radius: 15px;
+  align-self: center;
+  width: 100%;
+  max-width: 500px;
 }
-.add-chore-form-wrapper {
-  display: flex;
-  justify-content: center;
-}
-.add-chore-form-wrapper p {
-  width: 70%;
-}
-.add-chore-btn-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-.selected {
-  background-color: var(--pink);
-  border: 2px solid var(--pink);
-  color: var(--purple-dark);
-}
-.selected:hover {
-  background-color: var(--pink-dark);
-  border-color: var(--pink-dark);
-}
-.add-chore-btn-wrapper .btn {
+.add-chore-container .btn {
+  margin: 1rem;
+  width: 500px
+  }
+
+.add-titles {
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem 0;
+  background-color: var(--purple);
+  border-radius: 15px;
   margin-bottom: 1rem;
 }
-.add-chore-form .btn-fill_purple {
-  margin-bottom: 0;
-  margin-top: 2rem;
+input,
+select {
   display: inline-block;
+  margin-bottom: 2rem;
+  border: 1px solid var(--purple);
+  padding: 1rem;
+  border-radius: 15px;
+}
+
+.add-chore-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

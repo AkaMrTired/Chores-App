@@ -65,7 +65,9 @@ const EditChore = ({
       <h1>Edit chore</h1>
       <div>
         <form className="edit-chore-container" onSubmit={handleSubmit}>
-          <label htmlFor="name">Chore name</label>
+          <label className="edit-titles" htmlFor="name">
+            Chore name
+          </label>
           <input
             type="text"
             name="name"
@@ -74,7 +76,9 @@ const EditChore = ({
             value={fields.name}
             onChange={handleFieldChange}
           />
-          <label htmlFor="price">Chore price in pounds</label>
+          <label htmlFor="price" className="edit-titles">
+            Chore price in pounds
+          </label>
           <input
             type="text"
             name="price"
@@ -83,14 +87,16 @@ const EditChore = ({
             value={fields.price}
             onChange={handleFieldChange}
           />
-          <span>Status of the chore </span>
-          <span>note: you change the status to taken or pending approval</span>
+          <p className="edit-titles">Status of the chore </p>
+          <span>
+            note: you cannot change the status to taken or pending approval
+          </span>
 
           <button
             type="button"
             className={
               fields.status === "A"
-                ? "selected btn btn-fill_purple"
+                ? "selected btn btn-fill_pink"
                 : "btn btn-fill_purple"
             }
             name="available"
@@ -105,7 +111,7 @@ const EditChore = ({
             name="Unavailable"
             className={
               fields.status === "U"
-                ? "selected btn btn-fill_purple"
+                ? "selected btn btn-fill_pink"
                 : "btn btn-fill_purple"
             }
             value="U"
@@ -118,7 +124,7 @@ const EditChore = ({
             type="button"
             className={
               fields.status === "T"
-                ? "selected btn btn-fill_purple"
+                ? "selected btn btn-fill_pink"
                 : "btn btn-fill_purple"
             }
             name="Taken"
@@ -130,7 +136,7 @@ const EditChore = ({
             type="button"
             className={
               fields.status === "P"
-                ? "selected btn btn-fill_purple"
+                ? "selected btn btn-fill_pink"
                 : "btn btn-fill_purple"
             }
             name="Pending Approval"
@@ -138,12 +144,12 @@ const EditChore = ({
           >
             Pending approval
           </button>
-          <div>
-            <button className="btn btn-narrow btn-stroke_white" type="submit">
+          <div className="complete-btns">
+            <button className="btn chore-btn chore-btn_peach" type="submit">
               Save chore
             </button>
             <button
-              className="btn btn-narrow btn-stroke_white"
+              className="btn chore-btn chore-btn_peach"
               type="button"
               onClick={cancelEdit}
             >

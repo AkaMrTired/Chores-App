@@ -3,6 +3,11 @@ This app is designed to help a family get their chores done and keep the peace w
 This is the repository for the front end of the application, the back-end can be found here: https://github.com/LydiaCodes22/chores-app-back-end.
 
 ## Screenshots
+![screenshot of welcome page](./src/images/screenshots/welcomePage.png "The welcome page") 
+![screenshot of the parent dashboard](./src/images/screenshots/parentDashboard.png "The parents' dashboard") 
+![screenshot of the edit chore screen](./src/images/screenshots/editChore.png "The edit chore screen") 
+![screenshot of the add a chore screen](./src/images/screenshots/ "The edit chore screen") 
+
 
 ## Future Development
 The future of this app would see the API and front-end deployed to make them widely available.\
