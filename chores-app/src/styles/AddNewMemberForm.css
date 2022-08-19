@@ -2,7 +2,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: var(--mobile-width);
-    margin: 0 auto;
-    padding: 2rem;
+    align-self: center;
+    background: var(--gradient);
+    box-shadow: var(--shadow);
+    padding: 3rem 1rem;
+    border-radius: 20px;
+    width: 90vw;
+    max-width: 1000px;
+    margin: 5rem;
+}
+
+.invite-form {
+    display: flex;
+    flex-direction: column
 }

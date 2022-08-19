@@ -21,11 +21,15 @@ import Nav from "./Nav";
 const App = () => {
   const { chores } = useUserAuth();
 
+  const familyID = localStorage.getItem("familyID");
+  const userID = localStorage.getItem("userID");
+  const userRole = localStorage.getItem("userRole");
+
   return (
     <div className="App">
       <div id="app-container" className="app-container">
         <Router>
-          <Nav />
+          <Nav userRole={userRole} />
           <Switch>
             <Route
               exact
@@ -36,15 +40,27 @@ const App = () => {
 
             <Route exact path="/signup" element={<SignUpForm />} />
 
-            <Route exact path="/newmember" element={<AddNewMemberForm />} />
+            <Route
+              exact
+              path="/newmember"
+              element={<AddNewMemberForm familyID={familyID} />}
+            />
             <Route
               exact
               path="/parentdashboard"
               element={<ParentDashboard key={chores} />}
             />
-            <Route exact path="/listofchildren" element={<ListOfChildren />} />
+            <Route
+              exact
+              path="/listofchildren"
+              element={<ListOfChildren familyID={familyID} />}
+            />
 
-            <Route exact path="/addchore" element={<AddChoreForm />} />
+            <Route
+              exact
+              path="/addchore"
+              element={<AddChoreForm familyID={familyID} />}
+            />
 
             <Route
               exact
@@ -55,20 +71,38 @@ const App = () => {
             <Route
               exact
               path="/childdashboard"
-              element={<ChildDashboard key={chores} />}
+              element={
+                <ChildDashboard
+                  userID={userID}
+                  familyID={familyID}
+                  key={chores}
+                />
+              }
               // the key prop means the component will re-render when the chores array is updated
             />
 
             <Route
               exact
               path="/findchore"
-              element={<FindAvailableChores key={chores} />}
+              element={
+                <FindAvailableChores
+                  key={chores}
+                  familyID={familyID}
+                  userID={userID}
+                />
+              }
             />
 
             <Route
               exact
               path="/approvechores"
-              element={<ChoresToApprove key={chores} />}
+              element={
+                <ChoresToApprove
+                  familyID={familyID}
+                  userID={userID}
+                  key={chores}
+                />
+              }
             />
           </Switch>
         </Router>

@@ -6,6 +6,9 @@
   background-color: var(--white);
   border-radius: 15px;
   box-shadow: var(--shadow);
+  align-self: center;
+  width: 100%;
+  max-width: 500px;
 }
 
 .chore-btn {

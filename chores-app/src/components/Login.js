@@ -17,7 +17,6 @@ const Login = () => {
 
   const [fields, setFields] = useState(initialState.fields);
   const handleLogIn = (event) => {
-    axios.get("");
     event.preventDefault();
     logIn(fields.email, fields.password)
       .then(() => {
@@ -55,7 +54,7 @@ const Login = () => {
     setFields({ ...fields, [event.target.name]: event.target.value });
   };
   return (
-    <form onSubmit={handleLogIn}>
+    <form className="login-form" onSubmit={handleLogIn}>
       <label htmlFor="email">Your Email</label>
       <input
         type="email"

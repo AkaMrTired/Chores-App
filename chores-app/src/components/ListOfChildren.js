@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
-const ListOfChildren = () => {
-  const familyID = localStorage.getItem("familyID");
+const ListOfChildren = ({ familyID }) => {
   const [myChildren, setMyChildren] = useState([]);
 
   useEffect(() => {

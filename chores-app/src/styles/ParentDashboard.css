@@ -17,6 +17,9 @@ margin-top: 1rem;
   background: var(--gradient);
   padding: 0.5rem;
   border-radius: 25px;
+  width: 90vw;
+  max-width: 1000px;
+  margin: 5rem;
 }
 
 .parent-dashboard-chores-container h2 {

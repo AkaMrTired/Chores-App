@@ -1,5 +1,6 @@
 .approve-chores-container {
-    max-width: var(--mobile-width);
+    width: 90vw;
+    max-width: 1000px;
     margin: 2rem auto;
     background: var(--gradient);
     padding: 2rem;

@@ -1,13 +1,13 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import axios from "axios";
 import ChoreCard from "./ChoreCard";
 import { useUserAuth } from "../context/UserAuthContext";
 import "../styles/ChoresToApprove.css";
 
-const ChoresToApprove = () => {
+const ChoresToApprove = ({ familyID }) => {
   const { chores, setChores } = useUserAuth();
   useEffect(() => {
-    const familyID = localStorage.getItem("familyID");
     if (familyID) {
       console.log({ familyID });
       axios

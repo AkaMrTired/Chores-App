@@ -7,9 +7,16 @@ import axios from "axios";
 
 import { useUserAuth } from "../context/UserAuthContext";
 
-const EditChore = ({ setEditing, name, price, status, choreID, owner }) => {
+const EditChore = ({
+  setEditing,
+  name,
+  price,
+  status,
+  choreID,
+  owner,
+  familyID,
+}) => {
   const { setChores } = useUserAuth();
-  const familyID = localStorage.getItem("familyID");
   const initialState = {
     fields: {
       name,

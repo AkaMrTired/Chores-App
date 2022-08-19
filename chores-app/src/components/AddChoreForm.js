@@ -1,10 +1,10 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import "../styles/AddChoreForm.css";
 import axios from "axios";
 
-const AddChoreForm = () => {
-  const familyID = localStorage.getItem("familyID");
+const AddChoreForm = ({ familyID }) => {
   const initialState = {
     fields: {
       name: "",

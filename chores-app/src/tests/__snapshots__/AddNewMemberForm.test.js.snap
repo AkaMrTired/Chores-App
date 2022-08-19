@@ -3,70 +3,70 @@
 exports[`the new member form matches the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sign-up-container"
+    class="invite-member-container"
   >
     <h1>
       Invite New Member
     </h1>
-    <div>
-      <form>
-        <label
-          for="name"
+    <form
+      class="invite-form"
+    >
+      <label
+        for="name"
+      >
+        Name 
+      </label>
+      <input
+        name="name"
+        placeholder="e.g Timmy"
+        required=""
+        type="text"
+        value=""
+      />
+      <label
+        for="role"
+      >
+        Role
+      </label>
+      <select
+        name="role"
+        required=""
+      >
+        <option
+          value="Choose a role"
         >
-          Name 
-        </label>
-        <input
-          name="name"
-          placeholder="e.g Timmy"
-          required=""
-          type="text"
-          value=""
-        />
-        <label
-          for="role"
+          Choose a Role
+        </option>
+        <option
+          value="parent"
         >
-          Role
-        </label>
-        <select
-          name="role"
-          required=""
+          Parent
+        </option>
+        <option
+          value="child"
         >
-          <option
-            value="Choose a role"
-          >
-            Choose a Role
-          </option>
-          <option
-            value="parent"
-          >
-            Parent
-          </option>
-          <option
-            value="child"
-          >
-            Child
-          </option>
-        </select>
-        <label
-          for="email"
-        >
-          Email
-        </label>
-        <input
-          name="email"
-          placeholder="e.g example@example.com"
-          required=""
-          type="email"
-          value=""
-        />
-        <button
-          class="btn btn-fill_purple"
-          type="submit"
-        >
-          Send Invite!
-        </button>
-      </form>
-    </div>
+          Child
+        </option>
+      </select>
+      <label
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        name="email"
+        placeholder="e.g example@example.com"
+        required=""
+        type="email"
+        value=""
+      />
+      <button
+        class="btn btn-fill_purple"
+        type="submit"
+      >
+        Send Invite!
+      </button>
+    </form>
     <div
       class="back-btn-wrapper"
     >

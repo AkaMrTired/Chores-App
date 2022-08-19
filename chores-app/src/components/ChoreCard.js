@@ -9,11 +9,18 @@ import "../styles/ChoreCard.css";
 
 import { useUserAuth } from "../context/UserAuthContext";
 
-const ChoreCard = ({ name, price, status, component, choreID, choreOwner }) => {
+const ChoreCard = ({
+  name,
+  price,
+  status,
+  component,
+  choreID,
+  choreOwner,
+  familyID,
+  userID,
+}) => {
   const [editing, setEditing] = useState(false);
-  const { setChores } = useUserAuth();
-  const familyID = localStorage.getItem("familyID");
-  const userID = localStorage.getItem("userID");
+  const { chores, setChores } = useUserAuth();
 
   const editButton = (event) => {
     event.preventDefault();
@@ -100,6 +107,7 @@ const ChoreCard = ({ name, price, status, component, choreID, choreOwner }) => {
       })
       .then((response) => {
         setChores(response.data);
+        console.log("chores", chores);
       })
       .catch((e) => {
         console.log(e);
@@ -115,6 +123,7 @@ const ChoreCard = ({ name, price, status, component, choreID, choreOwner }) => {
         setEditing={setEditing}
         choreID={choreID}
         owner={choreOwner}
+        familyID={familyID}
       />
     );
   }

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import "../styles/Nav.css";
 import { useNavigate } from "react-router-dom";
@@ -5,11 +6,9 @@ import logo from "../images/dosh-logo.png";
 import { useUserAuth } from "../context/UserAuthContext";
 import LogOut from "./LogOut";
 
-const Nav = () => {
+const Nav = ({ userRole }) => {
   const navigate = useNavigate();
   const { user } = useUserAuth();
-
-  const userRole = localStorage.getItem("userRole");
 
   const navigateHome = (event) => {
     event.preventDefault();

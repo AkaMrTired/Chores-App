@@ -1,15 +1,13 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ChoreCard from "./ChoreCard";
 import { useUserAuth } from "../context/UserAuthContext";
 import "../styles/ChildDashboard.css";
 
-const ChildDashboard = () => {
+const ChildDashboard = ({ userID, familyID }) => {
   const { chores, setChores } = useUserAuth();
-  const userID = localStorage.getItem("userID");
-  console.log({ userID });
   useEffect(() => {
-    const familyID = localStorage.getItem("familyID");
     if (familyID) {
       axios
         .get(`http://localhost:3300/family/${familyID}/chores`)
@@ -32,7 +30,7 @@ const ChildDashboard = () => {
     setRequestedAmount(event.target.value);
     console.log(requestedAmount);
   };
-
+  console.log("userID", userID, "chores", chores);
   return (
     <div className="container child-dashboard-container">
       <h1>Dashboard</h1>
@@ -67,6 +65,8 @@ const ChildDashboard = () => {
           .filter((chore) => chore.owner == userID && chore.status == "T")
           .map((chore) => (
             <ChoreCard
+              familyID={familyID}
+              userID={userID}
               key={chore.choreID}
               name={chore.name}
               price={chore.price}
