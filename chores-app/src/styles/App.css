@@ -100,6 +100,14 @@ h2 {
   background-color: var(--pink-dark);
   border: 2px solid var(--pink-dark);
 }
+.btn-fill_peach {
+  background-color: var(--peach);
+  border: 2px solid var(--peach);
+}
+.btn-fill_peach:hover {
+  background-color: var(--peach-dark);
+  border: 2px solid var(--peach-dark);
+}
 
 .btn-stroke_purple {
   background-color: transparent;

@@ -1,14 +1,8 @@
-.parent-dashboard-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.parent-dashboard-container .btn:nth-of-type(2) {
+/* .parent-dashboard-container .btn:nth-of-type(2) {
 margin-top: 1rem;
-}
+} */
 
-.parent-dashboard-chores-container {
+.parent-dashboard-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,11 +16,18 @@ margin-top: 1rem;
   margin: 5rem;
 }
 
-.parent-dashboard-chores-container h2 {
+.parent-dashboard-container h2 {
   color: var(--purple-dark);
   text-align: center;
 }
 
-.parent-dashboard-chores-container .btn-narrow {
+.parent-dashboard-container .btn-narrow {
   margin-bottom: 1.5rem;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+
 }

@@ -26,33 +26,34 @@ const ParentDashboard = () => {
   return (
     <div className="container parent-dashboard-container">
       <h1>Dashboard</h1>
-      <button type="button" className="btn btn-stroke_purple btn-narrow">
+      <h2>My Family</h2>
+      <button type="button" className="btn btn-narrow btn-stroke_white">
         <a href="/newmember">+ Invite new member</a>
       </button>
-      <button type="button" className="btn btn-fill_pink">
-        <a href="/listofchildren">My Children</a>
+      <button type="button" className="btn btn-narrow btn-fill_purple">
+        <a href="/listofchildren">View Children</a>
       </button>
-      <div className="container parent-dashboard-chores-container">
-        <h2>Chores</h2>
+      <h2>Chores</h2>
+      <div className="btn-container">
         <button type="button" className="btn btn-narrow btn-stroke_white">
-          <a href="/addchore">Add new chore +</a>
+          <a href="/addchore">+ Add new chore</a>
         </button>
-        <button type="button" className="btn btn-narrow btn-fill_purple">
-          <a href="/approvechores">View complete chores pending approval</a>
+        <button type="button" className="btn btn-fill_peach">
+          <a href="/approvechores">Manage chores pending approval</a>
         </button>
-        {/* mapping function to go through the chores list and render them. */}
-        {chores.map((chore) => (
-          <ChoreCard
-            key={chore.choreID}
-            name={chore.name}
-            price={chore.price}
-            status={chore.status}
-            choreID={chore.choreID}
-            choreOwner={chore.owner}
-            component="ParentDashboard"
-          />
-        ))}
       </div>
+      {/* mapping function to go through the chores list and render them. */}
+      {chores.map((chore) => (
+        <ChoreCard
+          key={chore.choreID}
+          name={chore.name}
+          price={chore.price}
+          status={chore.status}
+          choreID={chore.choreID}
+          choreOwner={chore.owner}
+          component="ParentDashboard"
+        />
+      ))}
       <div />
     </div>
   );
